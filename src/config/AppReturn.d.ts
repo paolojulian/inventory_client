@@ -1,0 +1,1 @@
+export type AppReturn<T> = [T, null] | [null, T]
