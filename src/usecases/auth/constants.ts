@@ -1,3 +1,4 @@
 export const AUTH_UC_KEYS = {
-  isLoggedIn: () => []
-}
+  auth: () => ['auth'],
+  isLoggedIn: () => [...AUTH_UC_KEYS.auth(), 'is-logged-in'],
+};
