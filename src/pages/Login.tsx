@@ -6,7 +6,7 @@ const LoginPage = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!event.target) {
-      console.log('event target not found')
+      console.log('event target not found');
       return;
     }
 
@@ -15,10 +15,15 @@ const LoginPage = () => {
     const username = formData.get('username') as string;
     const password = formData.get('password') as string;
 
-    await mutateAsync({
+    const err = await mutateAsync({
       username,
       password,
     });
+
+    if (!err) {
+      // TODO: Add query to support ?redirectTo
+      window.location.href = '/';
+    }
   };
 
   return (
