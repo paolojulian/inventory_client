@@ -8,4 +8,13 @@ export const URLS = {
       me: () => `${URLS.rest.v1.base()}/auth/me`,
     },
   },
+  links: {
+    v1: {
+      login: '/login',
+      dashboard: '/',
+      products: '/products',
+      stockEntries: '/stock-entries',
+      inventory: '/inventory',
+    },
+  },
 };

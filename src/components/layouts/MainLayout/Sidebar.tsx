@@ -1,4 +1,5 @@
 import { AppText } from '@/components/shared';
+import { URLS } from '@/config/url.const';
 import { NavLink } from 'react-router';
 
 export const Sidebar = () => {
@@ -10,10 +11,10 @@ export const Sidebar = () => {
         </div>
 
         <ul className='flex flex-col flex-1 justify-center'>
-          <NavItem link='/' title='Dashboard' />
-          <NavItem link='/stock-entries' title='Stock' />
-          <NavItem link='/inventory' title='Inventory' />
-          <NavItem link='/products' title='Products' />
+          <NavItem link={URLS.links.v1.dashboard} title='Dashboard' />
+          <NavItem link={URLS.links.v1.stockEntries} title='Stock' />
+          <NavItem link={URLS.links.v1.inventory} title='Inventory' />
+          <NavItem link={URLS.links.v1.products} title='Products' />
         </ul>
 
         <button className='mt-auto p-4 hover:bg-grey/10 cursor-pointer text-left'>
