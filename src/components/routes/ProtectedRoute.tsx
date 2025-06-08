@@ -1,14 +1,15 @@
+import type { ReactNode } from 'react';
 import {
   Navigate,
-  Route,
-  type RouteProps,
-  useLocation,
+  useLocation
 } from 'react-router-dom';
 import { useIsLoggedIn } from '../../usecases/auth/useIsLoggedIn';
 
-type Props = RouteProps;
+type Props = {
+  children: ReactNode;
+};
 
-const ProtectedRoute = (props: Props) => {
+const ProtectedRoute = ({ children }: Props) => {
   const { isLoggedIn, isLoading, error } = useIsLoggedIn();
   const location = useLocation();
 
@@ -20,7 +21,7 @@ const ProtectedRoute = (props: Props) => {
     return <Navigate to={`/login?redirectTo=${redirectPath}`} replace />;
   }
 
-  return <Route {...props} />;
+  return children;
 };
 
 export default ProtectedRoute;

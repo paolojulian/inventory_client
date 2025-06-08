@@ -13,9 +13,15 @@ async function LoginInt(input: LoginIntInput): Promise<Error | null> {
       body: JSON.stringify(input),
       credentials: 'include',
     });
+    if (response.status === 401) {
+      throw ErrUnauthorizedLogin;
+    }
+
     if (!response.ok) {
       throw ErrUnableToLogin;
     }
+
+    return null;
   } catch (e) {
     if (e instanceof Error) {
       throw e;
@@ -23,7 +29,6 @@ async function LoginInt(input: LoginIntInput): Promise<Error | null> {
 
     throw ErrUnableToLogin;
   }
-  throw ErrUnauthorizedLogin;
 }
 
 export default LoginInt;

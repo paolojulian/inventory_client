@@ -1,14 +1,15 @@
+import type { ReactNode } from 'react';
 import {
   Navigate,
-  Route,
-  type RouteProps,
-  useSearchParams,
+  useSearchParams
 } from 'react-router-dom';
 import { useIsLoggedIn } from '../../usecases/auth/useIsLoggedIn';
 
-type Props = RouteProps;
+type Props = {
+  children: ReactNode;
+};
 
-const GuestRoute = (props: Props) => {
+const GuestRoute = ({ children }: Props) => {
   const { isLoggedIn, isLoading, error } = useIsLoggedIn();
   const [searchParams] = useSearchParams();
 
@@ -20,7 +21,7 @@ const GuestRoute = (props: Props) => {
     return <Navigate to={redirectTo} replace />;
   }
 
-  return <Route {...props} />;
+  return children;
 };
 
 export default GuestRoute;

@@ -1,4 +1,4 @@
-import { Routes } from 'react-router';
+import { Route, Routes } from 'react-router';
 import GuestRoute from './components/routes/GuestRoute';
 import ProtectedRoute from './components/routes/ProtectedRoute';
 import DashboardPage from './pages/Dashboard';
@@ -6,25 +6,36 @@ import LoginPage from './pages/Login';
 import { useLoadInitial } from './usecases/useLoadInitial';
 
 const App = () => {
-  const { isLoaded, error } = useLoadInitial();
+  const { isLoaded } = useLoadInitial();
   if (!isLoaded) {
     return null;
   }
 
-  if (error) {
-    console.error(error);
-    return 'Something went wrong.';
-  }
-
   return (
     <Routes>
-      {/* Protected routes */}
-      <ProtectedRoute path='/' element={<DashboardPage />}></ProtectedRoute>
+      <>
+        {/* Protected routes */}
+        <Route
+          path='/'
+          element={
+            <ProtectedRoute>
+              <DashboardPage />
+            </ProtectedRoute>
+          }
+        ></Route>
 
-      {/* Guest routes */}
-      <GuestRoute path='/login' element={<LoginPage />}></GuestRoute>
+        {/* Guest routes */}
+        <Route
+          path='/login'
+          element={
+            <GuestRoute>
+              <LoginPage />
+            </GuestRoute>
+          }
+        ></Route>
 
-      {/* Public routes */}
+        {/* Public routes */}
+      </>
     </Routes>
   );
 };
