@@ -13,3 +13,11 @@ class UnableToLoginError extends Error {
   }
 }
 export const ErrUnableToLogin = new UnableToLoginError();
+
+class UnableToLogoutError extends Error {
+  constructor() {
+    super();
+    this.message = 'Error: Unable to logout';
+  }
+}
+export const ErrUnableToLogout = new UnableToLogoutError();

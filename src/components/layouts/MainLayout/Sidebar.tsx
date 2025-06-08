@@ -1,8 +1,22 @@
 import { AppText } from '@/components/shared';
 import { URLS } from '@/config/url.const';
+import { useLogoutMutation } from '@/usecases/auth/useLogoutMutation';
+import cn from '@/utils/cn';
 import { NavLink } from 'react-router';
 
 export const Sidebar = () => {
+  const { isPending, mutateAsync } = useLogoutMutation();
+
+  const handleLogout = async () => {
+    try {
+      await mutateAsync();
+      window.location.replace(URLS.links.v1.login);
+    } catch (e) {
+      console.error(e);
+      alert('unable to logout.');
+    }
+  };
+
   return (
     <aside className='row-span-2 bg-background p-4 pr-2'>
       <div className='rounded-2xl border border-grey w-full h-full flex flex-col gap-10'>
@@ -17,8 +31,19 @@ export const Sidebar = () => {
           <NavItem link={URLS.links.v1.products} title='Products' />
         </ul>
 
-        <button className='mt-auto p-4 hover:bg-grey/10 cursor-pointer text-left'>
-          <AppText className='text-danger'>Logout</AppText>
+        <button
+          onClick={handleLogout}
+          className={cn(
+            'mt-auto p-4 hover:bg-grey/10 cursor-pointer text-left',
+            {
+              'animate-pulse': isPending,
+            }
+          )}
+          disabled={isPending}
+        >
+          <AppText className='text-danger'>
+            {isPending ? 'Logging out..' : 'Logout'}
+          </AppText>
         </button>
       </div>
     </aside>
