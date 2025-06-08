@@ -1,9 +1,7 @@
+import MainLayout from '@/components/layouts/MainLayout';
+
 const DashboardPage = () => {
-  return (
-    <div className='text-5xl tracking-[-0.04rem] uppercase'>
-      Dashboard Page.
-    </div>
-  );
+  return <MainLayout></MainLayout>;
 };
 
 export default DashboardPage;
