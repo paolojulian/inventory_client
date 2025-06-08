@@ -12,31 +12,33 @@ const App = () => {
   }
 
   return (
-    <Routes>
-      <>
-        {/* Protected routes */}
-        <Route
-          path='/'
-          element={
-            <ProtectedRoute>
-              <DashboardPage />
-            </ProtectedRoute>
-          }
-        ></Route>
+    <main className='font-display'>
+      <Routes>
+        <>
+          {/* Protected routes */}
+          <Route
+            path='/'
+            element={
+              <ProtectedRoute>
+                <DashboardPage />
+              </ProtectedRoute>
+            }
+          ></Route>
 
-        {/* Guest routes */}
-        <Route
-          path='/login'
-          element={
-            <GuestRoute>
-              <LoginPage />
-            </GuestRoute>
-          }
-        ></Route>
+          {/* Guest routes */}
+          <Route
+            path='/login'
+            element={
+              <GuestRoute>
+                <LoginPage />
+              </GuestRoute>
+            }
+          ></Route>
 
-        {/* Public routes */}
-      </>
-    </Routes>
+          {/* Public routes */}
+        </>
+      </Routes>
+    </main>
   );
 };
 
