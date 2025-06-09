@@ -16,8 +16,8 @@ const ProductsPage = () => {
       <AppTable className='w-full'>
         <AppTableHead>
           {/* <AppTableHeader width={80}>ID</AppTableHeader> */}
-          <AppTableHeader width={300}>Name</AppTableHeader>
-          <AppTableHeader width={300}>SKU</AppTableHeader>
+          <AppTableHeader>Name</AppTableHeader>
+          <AppTableHeader>SKU</AppTableHeader>
           <AppTableHeader width={380}>Description</AppTableHeader>
           <AppTableHeader className='text-center'>Price</AppTableHeader>
           <AppTableHeader className='text-center'>Actions</AppTableHeader>
@@ -34,7 +34,9 @@ const ProductsPage = () => {
                 <AppText>{product.sku}</AppText>
               </AppTableData>
               <AppTableData>
-                <AppText>{product.description}</AppText>
+                <AppText className='line-clamp-3'>
+                  {product.description}
+                </AppText>
               </AppTableData>
               <AppTableData className='text-center'>
                 <AppText>{product.price}</AppText>

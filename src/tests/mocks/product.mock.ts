@@ -29,6 +29,14 @@ export const PRODUCT_MOCKS = [
     sku: 'special-product--lg',
     price: 49999,
   },
+  {
+    ...NewTestProduct(),
+    name: 'Long Desc',
+    sku: 'long-desc',
+    description:
+      'The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog.',
+    price: 4999,
+  },
   NewTestProduct(),
   {
     ...NewTestProduct(),

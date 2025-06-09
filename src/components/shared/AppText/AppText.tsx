@@ -5,7 +5,7 @@ type FontVariants = 'small' | 'body' | 'heading' | 'heading-lg' | 'heading-xl';
 
 const fontVariantsMap = {
   small: 'text-[12px] lg:text-[14px] font-normal tracking-[0.04em]',
-  body: 'text-[16px] lg:text-[16px] font-normal',
+  body: 'text-[14px] lg:text-[14px] font-normal',
   heading: 'text-xl',
   'heading-lg':
     'text-[36px] lg:text-[48px] leading-[1.1] tracking-[-0.02em] mt-1',
