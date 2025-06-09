@@ -1,4 +1,4 @@
-import { AppText } from '@/components/shared';
+import { AppText, Hoverable } from '@/components/shared';
 import { URLS } from '@/config/url.const';
 import { useLogoutMutation } from '@/usecases/auth/useLogoutMutation';
 import cn from '@/utils/cn';
@@ -18,10 +18,10 @@ export const Sidebar = () => {
   };
 
   return (
-    <aside className='row-span-2 bg-background p-4 pr-2'>
-      <div className='rounded-2xl border border-grey w-full h-full flex flex-col gap-10'>
+    <aside className='p-4 pr-2 h-full'>
+      <div className='w-full h-full flex flex-col gap-10'>
         <div className='px-4 py-4'>
-          <AppText variant={'heading'}>Inventory</AppText>
+          <AppText variant={'heading'}>Inventory.</AppText>
         </div>
 
         <ul className='flex flex-col flex-1 justify-center'>
@@ -31,20 +31,19 @@ export const Sidebar = () => {
           <NavItem link={URLS.links.v1.products} title='Products' />
         </ul>
 
-        <button
-          onClick={handleLogout}
-          className={cn(
-            'mt-auto p-4 hover:bg-grey/10 cursor-pointer text-left',
-            {
+        <Hoverable>
+          <button
+            onClick={handleLogout}
+            className={cn('mt-auto cursor-pointer text-left', {
               'animate-pulse': isPending,
-            }
-          )}
-          disabled={isPending}
-        >
-          <AppText className='text-danger'>
-            {isPending ? 'Logging out..' : 'Logout'}
-          </AppText>
-        </button>
+            })}
+            disabled={isPending}
+          >
+            <AppText className='text-danger group-hover/hoverable:font-medium'>
+              {isPending ? 'Logging out..' : 'Logout'}
+            </AppText>
+          </button>
+        </Hoverable>
       </div>
     </aside>
   );
@@ -59,10 +58,14 @@ function NavItem({
   // isActive: boolean;
 }) {
   return (
-    <NavLink to={link}>
-      <li className='py-4 px-4 hover:bg-grey/10 cursor-pointer' role='menuitem'>
-        <AppText>{title}</AppText>
-      </li>
-    </NavLink>
+    <li>
+      <NavLink to={link}>
+        <Hoverable>
+          <AppText className='group-hover/hoverable:font-medium text-foreground/80 group-hover/hoverable:text-foreground'>
+            {title}
+          </AppText>
+        </Hoverable>
+      </NavLink>
+    </li>
   );
 }

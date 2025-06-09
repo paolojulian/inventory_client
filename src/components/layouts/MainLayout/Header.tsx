@@ -2,8 +2,8 @@ import { AppText } from '@/components/shared';
 
 export const Header = () => {
   return (
-    <header className='p-4 pl-2'>
-      <div className='bg-background border border-grey rounded-2xl px-4 min-h-14 flex flex-row items-center'>
+    <header className='m-4 ml-2'>
+      <div className='bg-background rounded-xl px-4 min-h-14 flex flex-row items-center shadow-sm'>
         <div className='flex-1 flex flex-row justify-center items-center'>
           <section className='w-full h-full'>
             <label></label>
