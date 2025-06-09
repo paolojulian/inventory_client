@@ -19,7 +19,9 @@ const MainLayout = ({ children }: Props) => {
 
         <main className='px-4 pl-2 overflow-y-auto pb-4 h-full'>
           <div className='bg-background border border-grey/20 shadow-sm rounded-xl p-4 min-h-full'>
-            {children || 'Main Content'}
+            <div className='mx-auto'>
+              {children || 'Main Content'}
+            </div>
           </div>
         </main>
       </div>
