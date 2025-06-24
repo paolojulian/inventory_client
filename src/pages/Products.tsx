@@ -5,10 +5,11 @@ import {
   AppTableBody,
   AppTableData,
   AppTableHead,
-  AppTableHeader,
   AppTableRow,
 } from '@/components/shared/AppTable';
+import AppTableHeaderSortable from '@/components/shared/AppTable/AppTableHeaderSortable';
 import { PRODUCT_MOCKS } from '@/tests/mocks/product.mock';
+import { formatMoney } from '@/utils/money';
 
 const ProductsPage = () => {
   return (
@@ -16,11 +17,17 @@ const ProductsPage = () => {
       <AppTable className='w-full'>
         <AppTableHead>
           {/* <AppTableHeader width={80}>ID</AppTableHeader> */}
-          <AppTableHeader>Name</AppTableHeader>
-          <AppTableHeader>SKU</AppTableHeader>
-          <AppTableHeader width={380}>Description</AppTableHeader>
-          <AppTableHeader className='text-center'>Price</AppTableHeader>
-          <AppTableHeader className='text-center'>Actions</AppTableHeader>
+          <AppTableHeaderSortable>Name</AppTableHeaderSortable>
+          <AppTableHeaderSortable>SKU</AppTableHeaderSortable>
+          <AppTableHeaderSortable width={380}>
+            Description
+          </AppTableHeaderSortable>
+          <AppTableHeaderSortable className='text-center'>
+            Price
+          </AppTableHeaderSortable>
+          <AppTableHeaderSortable className='text-center'>
+            Actions
+          </AppTableHeaderSortable>
         </AppTableHead>
 
         <AppTableBody>
@@ -39,7 +46,7 @@ const ProductsPage = () => {
                 </AppText>
               </AppTableData>
               <AppTableData className='text-center'>
-                <AppText>{product.price}</AppText>
+                <AppText>{formatMoney(product.price)}</AppText>
               </AppTableData>
               <AppTableData className='text-center'></AppTableData>
             </AppTableRow>
