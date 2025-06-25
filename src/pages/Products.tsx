@@ -5,6 +5,7 @@ import {
   AppTableBody,
   AppTableData,
   AppTableHead,
+  AppTableHeader,
   AppTableRow,
 } from '@/components/shared/AppTable';
 import AppTableHeaderSortable from '@/components/shared/AppTable/AppTableHeaderSortable';
@@ -13,7 +14,7 @@ import { formatMoney } from '@/utils/money';
 import { useState } from 'react';
 
 type SortTypes = 'asc' | 'desc' | 'default';
-type SortBy = 'name' | 'sku' | 'description' | 'price';
+type SortBy = 'name' | 'sku' | 'price';
 
 const ProductsPage = () => {
   const [sort, setSort] = useState<[SortBy | null, SortTypes | null]>([
@@ -38,15 +39,7 @@ const ProductsPage = () => {
           >
             SKU
           </AppTableHeaderSortable>
-          <AppTableHeaderSortable
-            sortType={
-              sort[0] === 'description' ? sort[1] ?? 'default' : 'default'
-            }
-            onClickSort={(sortType) => setSort(['description', sortType])}
-            width={380}
-          >
-            Description
-          </AppTableHeaderSortable>
+          <AppTableHeader width={380}>Description</AppTableHeader>
           <AppTableHeaderSortable
             sortType={sort[0] === 'price' ? sort[1] ?? 'default' : 'default'}
             onClickSort={(sortType) => setSort(['price', sortType])}
@@ -54,9 +47,7 @@ const ProductsPage = () => {
           >
             Price
           </AppTableHeaderSortable>
-          <AppTableHeaderSortable className='text-center'>
-            Actions
-          </AppTableHeaderSortable>
+          <AppTableHeader className='text-center'>Actions</AppTableHeader>
         </AppTableHead>
 
         <AppTableBody>
