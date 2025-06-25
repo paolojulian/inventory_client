@@ -10,19 +10,48 @@ import {
 import AppTableHeaderSortable from '@/components/shared/AppTable/AppTableHeaderSortable';
 import { PRODUCT_MOCKS } from '@/tests/mocks/product.mock';
 import { formatMoney } from '@/utils/money';
+import { useState } from 'react';
+
+type SortTypes = 'asc' | 'desc' | 'default';
+type SortBy = 'name' | 'sku' | 'description' | 'price';
 
 const ProductsPage = () => {
+  const [sort, setSort] = useState<[SortBy | null, SortTypes | null]>([
+    null,
+    null,
+  ]);
+
   return (
     <MainLayout>
       <AppTable className='w-full'>
         <AppTableHead>
           {/* <AppTableHeader width={80}>ID</AppTableHeader> */}
-          <AppTableHeaderSortable>Name</AppTableHeaderSortable>
-          <AppTableHeaderSortable>SKU</AppTableHeaderSortable>
-          <AppTableHeaderSortable width={380}>
+          <AppTableHeaderSortable
+            sortType={sort[0] === 'name' ? sort[1] ?? 'default' : 'default'}
+            onClickSort={(sortType) => setSort(['name', sortType])}
+          >
+            Name
+          </AppTableHeaderSortable>
+          <AppTableHeaderSortable
+            sortType={sort[0] === 'sku' ? sort[1] ?? 'default' : 'default'}
+            onClickSort={(sortType) => setSort(['sku', sortType])}
+          >
+            SKU
+          </AppTableHeaderSortable>
+          <AppTableHeaderSortable
+            sortType={
+              sort[0] === 'description' ? sort[1] ?? 'default' : 'default'
+            }
+            onClickSort={(sortType) => setSort(['description', sortType])}
+            width={380}
+          >
             Description
           </AppTableHeaderSortable>
-          <AppTableHeaderSortable className='text-center'>
+          <AppTableHeaderSortable
+            sortType={sort[0] === 'price' ? sort[1] ?? 'default' : 'default'}
+            onClickSort={(sortType) => setSort(['price', sortType])}
+            className='text-center'
+          >
             Price
           </AppTableHeaderSortable>
           <AppTableHeaderSortable className='text-center'>
