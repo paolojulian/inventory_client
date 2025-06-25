@@ -8,6 +8,7 @@ type AppTextInputProps = InputHTMLAttributes<HTMLInputElement> & {
   value?: string | number;
   isFullWidth?: boolean;
   errorMessage?: string;
+  variant?: 'default' | 'rounded';
 };
 
 const AppTextInput: FC<AppTextInputProps> = ({
@@ -19,6 +20,7 @@ const AppTextInput: FC<AppTextInputProps> = ({
   isFullWidth = true,
   errorMessage,
   value,
+  variant = 'default',
   ...props
 }) => {
   const [localValue, setLocalValue] = useState<string | number | undefined>(
@@ -61,6 +63,7 @@ const AppTextInput: FC<AppTextInputProps> = ({
           {
             'w-full': isFullWidth,
             'border-danger outline outline-danger': !!hasError,
+            'rounded-lg': variant === 'rounded',
           },
           className
         )}

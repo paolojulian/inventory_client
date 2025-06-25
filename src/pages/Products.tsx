@@ -1,5 +1,5 @@
 import MainLayout from '@/components/layouts/MainLayout';
-import { AppText } from '@/components/shared';
+import { AppText, AppTextInput } from '@/components/shared';
 import {
   AppTable,
   AppTableBody,
@@ -24,6 +24,9 @@ const ProductsPage = () => {
 
   return (
     <MainLayout>
+      <div className='flex items-center gap-2 mt-2 mb-8'>
+        <AppTextInput id='search' label='Search' variant='rounded' />
+      </div>
       <AppTable className='w-full'>
         <AppTableHead>
           {/* <AppTableHeader width={80}>ID</AppTableHeader> */}
