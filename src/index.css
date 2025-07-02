@@ -28,4 +28,5 @@
   --color-background: var(--color-white);
   --color-danger: var(--color-red-500);
   --color-link: var(--color-blue-500);
+  --color-accent: var(--color-blue-500);
 }
