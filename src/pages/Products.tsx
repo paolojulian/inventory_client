@@ -1,5 +1,5 @@
 import MainLayout from '@/components/layouts/MainLayout';
-import { AppText, AppTextInput } from '@/components/shared';
+import { AppRadioPill, AppText, AppTextInputSm } from '@/components/shared';
 import {
   AppPager,
   AppTable,
@@ -16,8 +16,10 @@ import { useState } from 'react';
 
 type SortTypes = 'asc' | 'desc' | 'default';
 type SortBy = 'name' | 'sku' | 'price';
+type FilterStatus = 'all' | 'active' | 'inactive';
 
 const ProductsPage = () => {
+  const [status, setStatus] = useState<FilterStatus>('all');
   const [sort, setSort] = useState<[SortBy | null, SortTypes | null]>([
     null,
     null,
@@ -33,74 +35,110 @@ const ProductsPage = () => {
 
   return (
     <MainLayout>
-      <div className='flex items-center gap-2 mt-2 mb-8'>
-        <AppTextInput
-          id='search'
-          label='Search'
-          variant='rounded'
-          onChangeText={(text) => console.log(text)}
-        />
-      </div>
+      <section id='products-page-filters'>
+        <div className='flex flex-col gap-4 mt-2 mb-8'>
+          <AppTextInputSm
+            id='search'
+            placeholder='Search by Name/SKU'
+            variant='rounded'
+          />
 
-      <div className='bg-white rounded-lg border border-gray-200 overflow-hidden'>
-        <AppTable className='w-full'>
-          <AppTableHead>
-            <AppTableHeaderSortable
-              sortType={sort[0] === 'name' ? sort[1] ?? 'default' : 'default'}
-              onClickSort={(sortType) => setSort(['name', sortType])}
-            >
-              Name
-            </AppTableHeaderSortable>
-            <AppTableHeaderSortable
-              sortType={sort[0] === 'sku' ? sort[1] ?? 'default' : 'default'}
-              onClickSort={(sortType) => setSort(['sku', sortType])}
-            >
-              SKU
-            </AppTableHeaderSortable>
-            <AppTableHeader width={380}>Description</AppTableHeader>
-            <AppTableHeaderSortable
-              sortType={sort[0] === 'price' ? sort[1] ?? 'default' : 'default'}
-              onClickSort={(sortType) => setSort(['price', sortType])}
-              className='text-center'
-            >
-              Price
-            </AppTableHeaderSortable>
-            <AppTableHeader className='text-center'>Actions</AppTableHeader>
-          </AppTableHead>
+          <div className='flex items-center gap-4'>
+            <AppText className='text-gray-500'>Status:</AppText>
 
-          <AppTableBody>
-            {currentItems.map((product) => (
-              <AppTableRow
-                key={product.id}
-                variant={product.isActive ? 'default' : 'disabled'}
+            <AppRadioPill
+              label='All'
+              id='all'
+              name='status'
+              value={'all' satisfies FilterStatus}
+              checked={status === 'all'}
+              onChange={(e) => setStatus(e.target.value as FilterStatus)}
+            />
+
+            <AppRadioPill
+              label='Active'
+              id='active'
+              name='status'
+              value={'active' satisfies FilterStatus}
+              checked={status === 'active'}
+              onChange={(e) => setStatus(e.target.value as FilterStatus)}
+            />
+
+            <AppRadioPill
+              label='Inactive'
+              id='inactive'
+              name='status'
+              value={'inactive' satisfies FilterStatus}
+              checked={status === 'inactive'}
+              onChange={(e) => setStatus(e.target.value as FilterStatus)}
+            />
+          </div>
+        </div>
+      </section>
+
+      <section id='products-page-table'>
+        <div className='bg-white  overflow-hidden'>
+          <AppTable className='w-full'>
+            <AppTableHead>
+              <AppTableHeaderSortable
+                sortType={sort[0] === 'name' ? sort[1] ?? 'default' : 'default'}
+                onClickSort={(sortType) => setSort(['name', sortType])}
               >
-                {/* <AppTableData>{product.id}</AppTableData> */}
-                <AppTableData>
-                  <AppText>{product.name}</AppText>
-                </AppTableData>
-                <AppTableData>
-                  <AppText>{product.sku}</AppText>
-                </AppTableData>
-                <AppTableData>
-                  <AppText className='line-clamp-3'>
-                    {product.description}
-                  </AppText>
-                </AppTableData>
-                <AppTableData className='text-center'>
-                  <AppText>{formatMoney(product.price)}</AppText>
-                </AppTableData>
-                <AppTableData className='text-center'></AppTableData>
-              </AppTableRow>
-            ))}
-          </AppTableBody>
-        </AppTable>
+                Name
+              </AppTableHeaderSortable>
+              <AppTableHeaderSortable
+                sortType={sort[0] === 'sku' ? sort[1] ?? 'default' : 'default'}
+                onClickSort={(sortType) => setSort(['sku', sortType])}
+              >
+                SKU
+              </AppTableHeaderSortable>
+              <AppTableHeader width={380}>Description</AppTableHeader>
+              <AppTableHeaderSortable
+                sortType={
+                  sort[0] === 'price' ? sort[1] ?? 'default' : 'default'
+                }
+                onClickSort={(sortType) => setSort(['price', sortType])}
+                className='text-center'
+              >
+                Price
+              </AppTableHeaderSortable>
+              <AppTableHeader className='text-center'>Actions</AppTableHeader>
+            </AppTableHead>
 
-        <AppPager
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={setCurrentPage}
-        />
-      </div>
+            <AppTableBody>
+              {currentItems.map((product) => (
+                <AppTableRow
+                  key={product.id}
+                  variant={product.isActive ? 'default' : 'disabled'}
+                >
+                  {/* <AppTableData>{product.id}</AppTableData> */}
+                  <AppTableData>
+                    <AppText>{product.name}</AppText>
+                  </AppTableData>
+                  <AppTableData>
+                    <AppText>{product.sku}</AppText>
+                  </AppTableData>
+                  <AppTableData>
+                    <AppText className='line-clamp-3'>
+                      {product.description}
+                    </AppText>
+                  </AppTableData>
+                  <AppTableData className='text-center'>
+                    <AppText>{formatMoney(product.price)}</AppText>
+                  </AppTableData>
+                  <AppTableData className='text-center'></AppTableData>
+                </AppTableRow>
+              ))}
+            </AppTableBody>
+          </AppTable>
+
+          <AppPager
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={setCurrentPage}
+          />
+        </div>
+      </section>
     </MainLayout>
   );
 };

@@ -9,7 +9,7 @@ const AppTableData = ({ className, variant = 'default', ...props }: Props) => {
   return (
     <td
       className={cn(
-        'border-b border-grey/10 px-4 py-3',
+        'border-b border-grey/10 px-4 py-4',
         {
           'opacity-50': variant === 'disabled',
         },

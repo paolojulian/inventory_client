@@ -34,7 +34,7 @@ export const Sidebar = () => {
         <Hoverable>
           <button
             onClick={handleLogout}
-            className={cn('mt-auto cursor-pointer text-left', {
+            className={cn('mt-auto cursor-pointer text-left py-4 px-4 ', {
               'animate-pulse': isPending,
             })}
             disabled={isPending}
@@ -60,8 +60,8 @@ function NavItem({
   return (
     <li>
       <NavLink to={link}>
-        <Hoverable>
-          <AppText className='group-hover/hoverable:font-medium text-foreground/80 group-hover/hoverable:text-foreground'>
+        <Hoverable className='w-full'>
+          <AppText className='group-hover/hoverable:font-medium text-foreground/80 group-hover/hoverable:text-foreground py-4 px-4 w-full'>
             {title}
           </AppText>
         </Hoverable>

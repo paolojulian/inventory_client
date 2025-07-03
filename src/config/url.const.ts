@@ -7,6 +7,10 @@ export const URLS = {
       login: () => `${URLS.rest.v1.base()}/auth/login`,
       logout: () => `${URLS.rest.v1.base()}/auth/logout`,
       me: () => `${URLS.rest.v1.base()}/auth/me`,
+      products: {
+        base: () => `${URLS.rest.v1.base()}/products`,
+        list: () => `${URLS.rest.v1.products.base()}`,
+      },
     },
   },
   links: {
