@@ -1,4 +1,5 @@
 import MainLayout from '@/components/layouts/MainLayout';
+import ProductRowKebabMenu from '@/components/moduled/products/ProductRowKebabMenu';
 import { AppRadioPill, AppText, AppTextInputSm } from '@/components/shared';
 import {
   AppPager,
@@ -77,32 +78,38 @@ const ProductsPage = () => {
       </section>
 
       <section id='products-page-table'>
-        <div className='bg-white  overflow-hidden'>
+        <div className='bg-white'>
           <AppTable className='w-full'>
             <AppTableHead>
-              <AppTableHeaderSortable
-                sortType={sort[0] === 'name' ? sort[1] ?? 'default' : 'default'}
-                onClickSort={(sortType) => setSort(['name', sortType])}
-              >
-                Name
-              </AppTableHeaderSortable>
-              <AppTableHeaderSortable
-                sortType={sort[0] === 'sku' ? sort[1] ?? 'default' : 'default'}
-                onClickSort={(sortType) => setSort(['sku', sortType])}
-              >
-                SKU
-              </AppTableHeaderSortable>
-              <AppTableHeader width={380}>Description</AppTableHeader>
-              <AppTableHeaderSortable
-                sortType={
-                  sort[0] === 'price' ? sort[1] ?? 'default' : 'default'
-                }
-                onClickSort={(sortType) => setSort(['price', sortType])}
-                className='text-center'
-              >
-                Price
-              </AppTableHeaderSortable>
-              <AppTableHeader className='text-center'>Actions</AppTableHeader>
+              <AppTableRow>
+                <AppTableHeaderSortable
+                  sortType={
+                    sort[0] === 'name' ? sort[1] ?? 'default' : 'default'
+                  }
+                  onClickSort={(sortType) => setSort(['name', sortType])}
+                >
+                  Name
+                </AppTableHeaderSortable>
+                <AppTableHeaderSortable
+                  sortType={
+                    sort[0] === 'sku' ? sort[1] ?? 'default' : 'default'
+                  }
+                  onClickSort={(sortType) => setSort(['sku', sortType])}
+                >
+                  SKU
+                </AppTableHeaderSortable>
+                <AppTableHeader width={380}>Description</AppTableHeader>
+                <AppTableHeaderSortable
+                  sortType={
+                    sort[0] === 'price' ? sort[1] ?? 'default' : 'default'
+                  }
+                  onClickSort={(sortType) => setSort(['price', sortType])}
+                  className='text-center'
+                >
+                  Price
+                </AppTableHeaderSortable>
+                <AppTableHeader className='text-center'>Actions</AppTableHeader>
+              </AppTableRow>
             </AppTableHead>
 
             <AppTableBody>
@@ -126,7 +133,9 @@ const ProductsPage = () => {
                   <AppTableData className='text-center'>
                     <AppText>{formatMoney(product.price)}</AppText>
                   </AppTableData>
-                  <AppTableData className='text-center'></AppTableData>
+                  <AppTableData className='text-center'>
+                    <ProductRowKebabMenu product={product} />
+                  </AppTableData>
                 </AppTableRow>
               ))}
             </AppTableBody>

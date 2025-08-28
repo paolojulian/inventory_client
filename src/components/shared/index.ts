@@ -4,4 +4,6 @@ export { AppText } from './AppText';
 export { AppTextInput } from './AppTextInput';
 export { AppTextInputSm } from './AppTextInputSm';
 export { Hoverable } from './Hoverable';
+export { Popper } from './Popper';
+export type { PopperPlacement } from './Popper';
 
