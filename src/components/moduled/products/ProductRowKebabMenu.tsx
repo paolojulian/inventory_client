@@ -16,6 +16,10 @@ const ProductRowKebabMenu = ({ product }: Props) => {
     alert(`Deleting ${product.name}`);
   };
 
+  const handleToggleActiveProduct = () => {
+    alert(`Toggle active ${product.name}`);
+  };
+
   return (
     <Popper
       trigger={
@@ -36,6 +40,13 @@ const ProductRowKebabMenu = ({ product }: Props) => {
                 onClose();
               }}
               title='Edit'
+            />
+            <MenuItem
+              onClick={() => {
+                handleToggleActiveProduct();
+                onClose();
+              }}
+              title='De-Activate'
             />
             <MenuItem
               onClick={() => {

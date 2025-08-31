@@ -4,11 +4,17 @@ import { type ReactNode } from 'react';
 
 type Props = {
   children: ReactNode;
+  className?: string;
 };
 
-const Menu = ({ children }: Props) => {
+const Menu = ({ children, className }: Props) => {
   return (
-    <div className='bg-white border border-gray-200 rounded-lg shadow-lg p-2 min-w-32'>
+    <div
+      className={cn(
+        'bg-white border border-gray-200 rounded-lg shadow-lg p-2 min-w-48',
+        className
+      )}
+    >
       <div className='flex flex-col gap-1'>{children}</div>
     </div>
   );

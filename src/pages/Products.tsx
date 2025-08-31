@@ -1,4 +1,5 @@
 import MainLayout from '@/components/layouts/MainLayout';
+import AddProduct from '@/components/moduled/products/AddProduct';
 import ProductRowKebabMenu from '@/components/moduled/products/ProductRowKebabMenu';
 import { AppRadioPill, AppText, AppTextInputSm } from '@/components/shared';
 import {
@@ -148,6 +149,8 @@ const ProductsPage = () => {
           />
         </div>
       </section>
+
+      <AddProduct />
     </MainLayout>
   );
 };

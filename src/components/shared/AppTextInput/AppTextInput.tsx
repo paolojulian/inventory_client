@@ -1,5 +1,5 @@
 import cn from '@/utils/cn';
-import { type FC, type InputHTMLAttributes, useEffect, useState } from 'react';
+import { type InputHTMLAttributes, useEffect, useState, forwardRef } from 'react';
 
 type AppTextInputProps = InputHTMLAttributes<HTMLInputElement> & {
   onChangeText?: (text?: string | number) => void;
@@ -11,7 +11,7 @@ type AppTextInputProps = InputHTMLAttributes<HTMLInputElement> & {
   variant?: 'default' | 'rounded';
 };
 
-const AppTextInput: FC<AppTextInputProps> = ({
+const AppTextInput = forwardRef<HTMLInputElement, AppTextInputProps>(({
   onChangeText = () => {},
   onChange,
   id,
@@ -22,7 +22,7 @@ const AppTextInput: FC<AppTextInputProps> = ({
   value,
   variant = 'default',
   ...props
-}) => {
+}, ref) => {
   const [localValue, setLocalValue] = useState<string | number | undefined>(
     value
   );
@@ -53,6 +53,7 @@ const AppTextInput: FC<AppTextInputProps> = ({
       })}
     >
       <input
+        ref={ref}
         onChange={handleChange}
         id={id}
         className={cn(
@@ -114,6 +115,8 @@ const AppTextInput: FC<AppTextInputProps> = ({
       </label>
     </div>
   );
-};
+});
+
+AppTextInput.displayName = 'AppTextInput';
 
 export default AppTextInput;
