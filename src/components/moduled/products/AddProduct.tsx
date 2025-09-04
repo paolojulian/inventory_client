@@ -54,6 +54,7 @@ const AddProduct = () => {
                   render={({ field, fieldState }) => (
                     <AppTextInput
                       id='name'
+                      autoFocus
                       placeholder='Name of the product'
                       label='Name'
                       errorMessage={fieldState.error?.message}

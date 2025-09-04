@@ -28,7 +28,15 @@ export const useAddProductsActions = () => {
     defaultValues: DEFAULT_VALUES,
   });
 
-  const onSubmit = handleSubmit((data) => console.log(data));
+  const onError = () => {
+    console.log('errors', errors);
+
+    alert('Unable to save product, please try again later.');
+  };
+  const onSuccess = () => {
+    alert('Product Saved!');
+  };
+  const onSubmit = handleSubmit(onSuccess, onError);
 
   // Feat: Modal visibility controller
   const [isModalOpen, setIsModalOpen] = useState(false);

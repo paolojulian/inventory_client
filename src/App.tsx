@@ -9,6 +9,7 @@ import LoginPage from './pages/Login';
 import { useLoadInitial } from './usecases/useLoadInitial';
 import InventoryPage from '@/pages/Inventory';
 import { NotFoundPage } from '@/pages/NotFound';
+import ToastProvider from './components/providers/ToastProvider';
 
 const App = () => {
   const { isLoaded } = useLoadInitial();
@@ -17,56 +18,58 @@ const App = () => {
   }
 
   return (
-    <Routes>
-      <>
-        {/* Protected routes */}
-        <Route
-          path={URLS.links.v1.dashboard}
-          element={
-            <ProtectedRoute>
-              <DashboardPage />
-            </ProtectedRoute>
-          }
-        ></Route>
-        <Route
-          path={URLS.links.v1.products}
-          element={
-            <ProtectedRoute>
-              <ProductsPage />
-            </ProtectedRoute>
-          }
-        ></Route>
-        <Route
-          path={URLS.links.v1.stockEntries}
-          element={
-            <ProtectedRoute>
-              <StockEntriesPage />
-            </ProtectedRoute>
-          }
-        ></Route>
-        <Route
-          path={URLS.links.v1.inventory}
-          element={
-            <ProtectedRoute>
-              <InventoryPage />
-            </ProtectedRoute>
-          }
-        ></Route>
+    <ToastProvider>
+      <Routes>
+        <>
+          {/* Protected routes */}
+          <Route
+            path={URLS.links.v1.dashboard}
+            element={
+              <ProtectedRoute>
+                <DashboardPage />
+              </ProtectedRoute>
+            }
+          ></Route>
+          <Route
+            path={URLS.links.v1.products}
+            element={
+              <ProtectedRoute>
+                <ProductsPage />
+              </ProtectedRoute>
+            }
+          ></Route>
+          <Route
+            path={URLS.links.v1.stockEntries}
+            element={
+              <ProtectedRoute>
+                <StockEntriesPage />
+              </ProtectedRoute>
+            }
+          ></Route>
+          <Route
+            path={URLS.links.v1.inventory}
+            element={
+              <ProtectedRoute>
+                <InventoryPage />
+              </ProtectedRoute>
+            }
+          ></Route>
 
-        {/* Guest routes */}
-        <Route
-          path='/login'
-          element={
-            <GuestRoute>
-              <LoginPage />
-            </GuestRoute>
-          }
-        ></Route>
+          {/* Guest routes */}
+          <Route
+            path='/login'
+            element={
+              <GuestRoute>
+                <LoginPage />
+              </GuestRoute>
+            }
+          ></Route>
 
-        {/* Public routes */}
-        <Route path='*' element={<NotFoundPage />} />
-      </>
-    </Routes>
+          {/* Public routes */}
+          <Route path='*' element={<NotFoundPage />} />
+        </>
+      </Routes>
+    </ToastProvider>
   );
 };
 
