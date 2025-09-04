@@ -1,15 +1,11 @@
 import cn from '@/utils/cn';
-import type { ReactNode } from 'react';
+import type { ButtonHTMLAttributes } from 'react';
 
-type Props = {
-  onClick: () => void;
-  children: ReactNode;
-};
+type Props = ButtonHTMLAttributes<HTMLButtonElement>;
 
-const AppCtaFab = ({ onClick, children }: Props) => {
+const AppCtaFab = ({ ...rest }: Props) => {
   return (
     <button
-      onClick={onClick}
       className={cn(
         // base shape + size
         'relative flex items-center justify-center rounded-full size-16 p-2',
@@ -20,9 +16,8 @@ const AppCtaFab = ({ onClick, children }: Props) => {
         'active:scale-95',
         'cursor-pointer'
       )}
-    >
-      {children}
-    </button>
+      {...rest}
+    />
   );
 };
 

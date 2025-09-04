@@ -1,18 +1,13 @@
-import { type ReactNode } from 'react';
+import { type ButtonHTMLAttributes } from 'react';
 
-type Props = {
-  onClick?: () => void;
-  children?: ReactNode;
-};
+type Props = ButtonHTMLAttributes<HTMLButtonElement>;
 
-const AppIconButton = ({ onClick, children }: Props) => {
+const AppIconButton = ({ ...rest }: Props) => {
   return (
     <button
-      onClick={onClick}
       className='size-8 flex flex-col items-center justify-center cursor-pointer rounded-full hover:bg-black/20 transition-colors p-1'
-    >
-      {children}
-    </button>
+      {...rest}
+    />
   );
 };
 

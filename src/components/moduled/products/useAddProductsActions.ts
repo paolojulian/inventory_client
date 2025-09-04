@@ -1,3 +1,5 @@
+import { toast } from '@/hooks/useToast';
+import { useMutation } from '@tanstack/react-query';
 import { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -28,15 +30,28 @@ export const useAddProductsActions = () => {
     defaultValues: DEFAULT_VALUES,
   });
 
-  const onError = () => {
-    console.log('errors', errors);
+  const { mutateAsync } = useMutation({
+    mutationKey: ['AddProduct'],
+    mutationFn: () => {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(true);
+        }, 1000);
+      });
+    },
+  });
 
-    alert('Unable to save product, please try again later.');
+  const onAddProduct = async () => {
+    const result = await mutateAsync();
+    if (!result) {
+      toast.error('Unable to save product, please try again later.');
+      return;
+    }
+
+    toast.success('Product added successfully.');
   };
-  const onSuccess = () => {
-    alert('Product Saved!');
-  };
-  const onSubmit = handleSubmit(onSuccess, onError);
+
+  const onSubmit = handleSubmit(onAddProduct);
 
   // Feat: Modal visibility controller
   const [isModalOpen, setIsModalOpen] = useState(false);

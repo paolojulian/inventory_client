@@ -25,7 +25,7 @@ const AddProduct = () => {
   return (
     <>
       <div className='fixed right-0 bottom-0 p-8'>
-        <AppCtaFab onClick={handleOpenModal}>
+        <AppCtaFab type='button' onClick={handleOpenModal}>
           <div className='text-4xl'>+</div>
         </AppCtaFab>
       </div>
