@@ -38,7 +38,7 @@ const AddProduct = () => {
               <section>
                 <div className='flex flex-row justify-between'>
                   <AppText variant={'heading'}>Add Product</AppText>
-                  <AppIconButton onClick={handleCloseModal}>
+                  <AppIconButton onClick={handleCloseModal} type="button">
                     <XMarkIcon />
                   </AppIconButton>
                 </div>
