@@ -1,6 +1,6 @@
-import AddEditProductForm from '@/components/moduled/products/AddEditProductForm';
-import { useAddEditProductForm } from '@/components/moduled/products/useAddEditProductForm';
-import { useAddProductsActions } from '@/components/moduled/products/useAddProductsActions';
+import AddEditProductForm from '@/components/moduled/products/shared/AddEditProductForm';
+import { useAddEditProductForm } from '@/components/moduled/products/hooks/useAddEditProductForm';
+import { useAddProductsActions } from '@/components/moduled/products/AddProduct/useAddProductsActions';
 import AppCtaFab from '@/components/shared/AppCtaFab';
 import BottomSheetModal from '@/components/shared/BottomSheetModal';
 import { createPortal } from 'react-dom';

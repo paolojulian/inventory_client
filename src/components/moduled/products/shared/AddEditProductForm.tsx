@@ -1,4 +1,4 @@
-import type { AddProductFormData } from '@/components/moduled/products/useAddEditProductForm';
+import type { AddProductFormData } from '@/components/moduled/products/hooks/useAddEditProductForm';
 import { AppButton, AppText, AppTextInput } from '@/components/shared';
 import AppDivider from '@/components/shared/AppDivider';
 import AppIconButton from '@/components/shared/AppIconButton';

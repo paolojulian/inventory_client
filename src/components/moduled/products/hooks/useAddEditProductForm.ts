@@ -18,14 +18,20 @@ const DEFAULT_VALUES: AddProductFormData = {
   status: 'active',
 };
 
-export const useAddEditProductForm = () => {
+type Props = {
+  initialValues?: AddProductFormData;
+};
+
+export const useAddEditProductForm = ({
+  initialValues = DEFAULT_VALUES,
+}: Props = {}) => {
   const {
     control,
     formState: { errors },
     reset,
     handleSubmit,
   } = useForm<AddProductFormData>({
-    defaultValues: DEFAULT_VALUES,
+    defaultValues: initialValues,
   });
 
   const { mutateAsync } = useMutation({
