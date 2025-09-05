@@ -1,3 +1,4 @@
+import { useAddProductForm } from '@/components/moduled/products/useAddProductForm';
 import { useAddProductsActions } from '@/components/moduled/products/useAddProductsActions';
 import { AppButton, AppText, AppTextInput } from '@/components/shared';
 import AppCtaFab from '@/components/shared/AppCtaFab';
@@ -13,14 +14,9 @@ import { createPortal } from 'react-dom';
 import { Controller } from 'react-hook-form';
 
 const AddProduct = () => {
-  const {
-    control,
-    nameInputRef,
-    isModalOpen,
-    handleCloseModal,
-    handleOpenModal,
-    onSubmit,
-  } = useAddProductsActions();
+  const { control, onResetForm, onSubmit } = useAddProductForm();
+  const { nameInputRef, isModalOpen, handleCloseModal, handleOpenModal } =
+    useAddProductsActions({ onResetForm });
 
   return (
     <>
@@ -38,7 +34,7 @@ const AddProduct = () => {
               <section>
                 <div className='flex flex-row justify-between'>
                   <AppText variant={'heading'}>Add Product</AppText>
-                  <AppIconButton onClick={handleCloseModal} type="button">
+                  <AppIconButton onClick={handleCloseModal}>
                     <XMarkIcon />
                   </AppIconButton>
                 </div>

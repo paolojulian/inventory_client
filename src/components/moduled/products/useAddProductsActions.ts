@@ -1,9 +1,6 @@
-import { toast } from '@/hooks/useToast';
-import { useMutation } from '@tanstack/react-query';
 import { useEffect, useRef, useState } from 'react';
-import { useForm } from 'react-hook-form';
 
-type AddProductFormData = {
+export type AddProductFormData = {
   name: string;
   sku: string;
   description: string;
@@ -11,48 +8,11 @@ type AddProductFormData = {
   status?: 'active' | 'inactive';
 };
 
-const DEFAULT_VALUES: AddProductFormData = {
-  name: '',
-  description: '',
-  sku: '',
-  price: undefined,
-  status: 'active',
+type Props = {
+  onResetForm: () => void;
 };
 
-export const useAddProductsActions = () => {
-  // Feat: the form
-  const {
-    control,
-    formState: { errors },
-    reset,
-    handleSubmit,
-  } = useForm<AddProductFormData>({
-    defaultValues: DEFAULT_VALUES,
-  });
-
-  const { mutateAsync } = useMutation({
-    mutationKey: ['AddProduct'],
-    mutationFn: () => {
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          resolve(true);
-        }, 1000);
-      });
-    },
-  });
-
-  const onAddProduct = async () => {
-    const result = await mutateAsync();
-    if (!result) {
-      toast.error('Unable to save product, please try again later.');
-      return;
-    }
-
-    toast.success('Product added successfully.');
-  };
-
-  const onSubmit = handleSubmit(onAddProduct);
-
+export const useAddProductsActions = ({ onResetForm }: Props) => {
   // Feat: Modal visibility controller
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleOpenModal = () => setIsModalOpen(true);
@@ -65,16 +25,13 @@ export const useAddProductsActions = () => {
     if (isModalOpen && nameInputRef.current) {
       nameInputRef.current.focus();
     }
-    reset(DEFAULT_VALUES);
-  }, [isModalOpen, reset]);
+    onResetForm();
+  }, [isModalOpen, onResetForm]);
 
   return {
-    control,
-    errors,
     nameInputRef,
     isModalOpen,
     handleOpenModal,
     handleCloseModal,
-    onSubmit,
   };
 };
