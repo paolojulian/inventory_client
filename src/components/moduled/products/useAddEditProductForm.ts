@@ -18,7 +18,7 @@ const DEFAULT_VALUES: AddProductFormData = {
   status: 'active',
 };
 
-export const useAddProductForm = () => {
+export const useAddEditProductForm = () => {
   const {
     control,
     formState: { errors },

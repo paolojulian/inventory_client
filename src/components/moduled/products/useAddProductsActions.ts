@@ -1,13 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 
-export type AddProductFormData = {
-  name: string;
-  sku: string;
-  description: string;
-  price?: number;
-  status?: 'active' | 'inactive';
-};
-
 type Props = {
   onResetForm: () => void;
 };
