@@ -7,7 +7,7 @@ import {
   requiredAndEmptySpacesValidation,
   requiredValidation,
 } from '@/utils/form-validations';
-import type { Ref } from 'react';
+import type { FormEvent, Ref } from 'react';
 import { Controller, type Control } from 'react-hook-form';
 
 type Props = {
@@ -23,13 +23,18 @@ const AddEditProductForm = ({
   control,
   nameInputRef,
 }: Props) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    onSubmit();
+  };
+
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={handleSubmit}>
       {/* header */}
       <section>
         <div className='flex flex-row justify-between'>
           <AppText variant={'heading'}>Add Product</AppText>
-          <AppIconButton onClick={onClose}>
+          <AppIconButton onClick={onClose} type='button'>
             <XMarkIcon />
           </AppIconButton>
         </div>

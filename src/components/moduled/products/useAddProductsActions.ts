@@ -18,7 +18,7 @@ export const useAddProductsActions = ({ onResetForm }: Props) => {
       nameInputRef.current.focus();
     }
     onResetForm();
-  }, [isModalOpen, onResetForm]);
+  }, [isModalOpen]);
 
   return {
     nameInputRef,
