@@ -15,6 +15,7 @@ type Props = {
   onClose: () => void;
   nameInputRef: Ref<HTMLInputElement>;
   control: Control<AddProductFormData>;
+  titleText?: string;
 };
 
 const AddEditProductForm = ({
@@ -22,6 +23,7 @@ const AddEditProductForm = ({
   onSubmit,
   control,
   nameInputRef,
+  titleText = 'Add Product',
 }: Props) => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -33,7 +35,7 @@ const AddEditProductForm = ({
       {/* header */}
       <section>
         <div className='flex flex-row justify-between'>
-          <AppText variant={'heading'}>Add Product</AppText>
+          <AppText variant={'heading'}>{titleText}</AppText>
           <AppIconButton onClick={onClose} type='button'>
             <XMarkIcon />
           </AppIconButton>

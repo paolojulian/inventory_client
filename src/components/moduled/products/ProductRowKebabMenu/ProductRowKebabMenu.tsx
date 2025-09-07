@@ -1,16 +1,15 @@
 import { Hoverable, Popper } from '@/components/shared';
 import EllipsisVerticalIcon from '@/components/shared/icons/EllipsisVerticalIcon';
 import Menu, { MenuItem } from '@/components/shared/Menu';
-import type { ProductMock } from '@/tests/mocks/product.factory';
+import type { Product } from '@/domain/product.domain';
 
 type Props = {
-  product: ProductMock;
+  onEditProduct: (product: Product) => void;
+  product: Product;
 };
 
-const ProductRowKebabMenu = ({ product }: Props) => {
-  const handleEditClicked = () => {
-    alert(`Editing ${product.name}`);
-  };
+const ProductRowKebabMenu = ({ onEditProduct, product }: Props) => {
+  const handleEditClicked = () => onEditProduct(product);
 
   const handleDeleteClicked = () => {
     alert(`Deleting ${product.name}`);

@@ -1,6 +1,6 @@
 import AddEditProductForm from '@/components/moduled/products/shared/AddEditProductForm';
 import { useAddEditProductForm } from '@/components/moduled/products/hooks/useAddEditProductForm';
-import { useAddProductsActions } from '@/components/moduled/products/AddProduct/useAddProductsActions';
+import { useAddEditProductsActions } from '@/components/moduled/products/hooks/useAddEditProductsActions';
 import AppCtaFab from '@/components/shared/AppCtaFab';
 import BottomSheetModal from '@/components/shared/BottomSheetModal';
 import { createPortal } from 'react-dom';
@@ -8,7 +8,7 @@ import { createPortal } from 'react-dom';
 const AddProduct = () => {
   const { control, onResetForm, onSubmit } = useAddEditProductForm();
   const { nameInputRef, isModalOpen, handleCloseModal, handleOpenModal } =
-    useAddProductsActions({ onResetForm });
+    useAddEditProductsActions({ onResetForm });
 
   return (
     <>

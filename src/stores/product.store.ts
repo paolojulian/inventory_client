@@ -14,12 +14,15 @@ export interface ProductStore {
   loading: boolean;
   error: string | null;
 
+  selectedEditProduct: Product | null;
+
   // Actions
   setProducts: (products: Product[]) => void;
   setLoading: (loading: boolean) => void;
   setError: (error: string | null) => void;
   updateFilters: (filters: Partial<ProductFilters>) => void;
   resetFilters: () => void;
+  setSelectedEditProduct: (product: Product | null) => void;
 
   // Computed
   filteredProducts: () => Product[];
@@ -38,6 +41,8 @@ export const useProductStore = create<ProductStore>((set, get) => ({
   loading: false,
   error: null,
 
+  selectedEditProduct: null,
+
   setProducts: (products) => set({ products }),
   setLoading: (loading) => set({ loading }),
   setError: (error) => set({ error }),
@@ -46,6 +51,8 @@ export const useProductStore = create<ProductStore>((set, get) => ({
       filters: { ...state.filters, ...newFilters },
     })),
   resetFilters: () => set({ filters: initialFilters }),
+
+  setSelectedEditProduct: (product) => set({ selectedEditProduct: product }),
 
   filteredProducts: () => {
     const { products, filters } = get();

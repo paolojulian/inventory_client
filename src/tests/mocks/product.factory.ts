@@ -1,15 +1,8 @@
-export type ProductMock = {
-  id: string;
-  sku: string;
-  name: string;
-  description: string;
-  price: number;
-  isActive: boolean;
-};
+import type { Product } from '@/domain/product.domain';
 
 let idCounter = 0;
 
-export function NewTestProduct(): ProductMock {
+export function NewTestProduct(): Product {
   idCounter += 1;
 
   return {
@@ -17,7 +10,7 @@ export function NewTestProduct(): ProductMock {
     sku: 'ube-jam--md',
     name: 'UBE Jam',
     description: 'Test description',
-    price: 29999,
-    isActive: true,
+    price: { cents: 29999 },
+    status: 'active',
   };
 }

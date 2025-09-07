@@ -4,7 +4,7 @@ type Props = {
   onResetForm: () => void;
 };
 
-export const useAddProductsActions = ({ onResetForm }: Props) => {
+export const useAddEditProductsActions = ({ onResetForm }: Props) => {
   // Feat: Modal visibility controller
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleOpenModal = () => setIsModalOpen(true);
