@@ -50,6 +50,7 @@ const ProductsPage = () => {
   return (
     <>
       <EditProduct
+        key={selectedEditProduct?.id}
         onClose={handleCloseEditProduct}
         product={selectedEditProduct}
       />

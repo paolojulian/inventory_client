@@ -22,16 +22,16 @@ type Props = {
   initialValues?: AddProductFormData;
 };
 
-export const useAddEditProductForm = ({
-  initialValues = DEFAULT_VALUES,
-}: Props = {}) => {
+export const useAddEditProductForm = (
+  { initialValues }: Props = { initialValues: undefined }
+) => {
   const {
     control,
     formState: { errors },
     reset,
     handleSubmit,
   } = useForm<AddProductFormData>({
-    defaultValues: initialValues,
+    defaultValues: initialValues || DEFAULT_VALUES,
   });
 
   const { mutateAsync } = useMutation({
@@ -56,7 +56,7 @@ export const useAddEditProductForm = ({
   };
 
   const onSubmit = handleSubmit(onAddProduct);
-  const onResetForm = () => reset(DEFAULT_VALUES);
+  const onResetForm = () => reset(initialValues);
 
   return {
     control,
