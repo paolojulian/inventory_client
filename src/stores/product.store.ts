@@ -5,7 +5,7 @@ export interface ProductFilters {
   search: string;
   status: 'all' | 'active' | 'inactive';
   sortBy: 'name' | 'price' | 'sku' | 'status';
-  sortOrder: 'asc' | 'desc';
+  sortOrder: 'asc' | 'desc' | 'default';
 }
 
 export interface ProductStore {
