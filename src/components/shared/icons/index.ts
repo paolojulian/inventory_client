@@ -6,3 +6,4 @@ export { default as ChevronRightIcon } from './ChevronRightIcon';
 export { default as ChevronUpDownIcon } from './ChevronUpDownIcon';
 export { default as ChevronUpIcon } from './ChevronUpIcon';
 export { default as AdjustmentsHorizontalIcon } from './AdjustmentsHorizontalIcon';
+export { default as PencilIcon } from './PencilIcon';

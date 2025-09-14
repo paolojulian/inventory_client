@@ -3,6 +3,7 @@ import AddProduct from '@/components/moduled/products/AddProduct';
 import EditProduct from '@/components/moduled/products/EditProduct';
 import ProductFilters from '@/components/moduled/products/ProductFilters';
 import ProductList from '@/components/moduled/products/ProductList';
+import ViewProduct from '@/components/moduled/products/ViewProduct';
 import PageHeader from '@/components/shared/PageHeader';
 import { useProductStore } from '@/stores/product.store';
 import { PRODUCT_MOCKS } from '@/tests/mocks/product.mock';
@@ -39,11 +40,12 @@ const ProductsPage = () => {
         onClose={handleCloseEditProduct}
         product={selectedEditProduct}
       />
+      <ViewProduct />
 
       <MainLayout>
-        <PageHeader title='Products' />
+        <PageHeader title='Products' shouldHideBack shouldHideKebab />
 
-        <section id='products-page-filters'>
+        <section id='products-page-filters' className='mt-2'>
           <ProductFilters />
         </section>
 

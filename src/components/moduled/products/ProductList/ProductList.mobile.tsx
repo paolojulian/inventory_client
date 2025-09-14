@@ -2,17 +2,27 @@ import type { ProductListCommonProps } from '@/components/moduled/products/Produ
 import { AppText } from '@/components/shared';
 import AppPill from '@/components/shared/AppPill';
 import { ChevronRightIcon } from '@/components/shared/icons';
+import type { Product } from '@/domain/product.domain';
+import { useProductStore } from '@/stores/product.store';
 import { formatMoney } from '@/utils/money';
 
 type Props = ProductListCommonProps;
 
 const ProductListMobile = ({ items }: Props) => {
+  const setSelectedViewProduct = useProductStore(
+    (state) => state.setSelectedViewProduct
+  );
+
+  const handleSelectProduct = (product: Product) => () =>
+    setSelectedViewProduct(product);
+
   return (
     <div className='flex flex-col gap-2 rounded-2xl'>
       {items.map((item) => (
         <div
           key={item.id}
           className='bg-white p-4 border border-neutral-200 rounded-lg'
+          onClick={handleSelectProduct(item)}
         >
           <div className='flex flex-row items-start justify-between'>
             <div>

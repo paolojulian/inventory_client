@@ -21,6 +21,7 @@ export interface ProductStore {
   loading: boolean;
   error: string | null;
 
+  selectedViewProduct: Product | null;
   selectedEditProduct: Product | null;
 
   // Actions
@@ -34,6 +35,7 @@ export interface ProductStore {
   updatePriceRangeMaxFilter: (max?: number) => void;
   resetFilters: () => void;
   setSelectedEditProduct: (product: Product | null) => void;
+  setSelectedViewProduct: (product: Product | null) => void;
 
   // Computed
   filteredProducts: () => Product[];
@@ -56,6 +58,7 @@ export const useProductStore = create<ProductStore>((set, get) => ({
   loading: false,
   error: null,
 
+  selectedViewProduct: null,
   selectedEditProduct: null,
 
   setProducts: (products) => set({ products }),
@@ -102,6 +105,7 @@ export const useProductStore = create<ProductStore>((set, get) => ({
   resetFilters: () => set({ filters: initialFilters }),
 
   setSelectedEditProduct: (product) => set({ selectedEditProduct: product }),
+  setSelectedViewProduct: (product) => set({ selectedViewProduct: product }),
 
   filteredProducts: () => {
     const { products, filters } = get();
