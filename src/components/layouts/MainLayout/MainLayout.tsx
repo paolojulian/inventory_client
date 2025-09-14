@@ -4,9 +4,10 @@ import { Sidebar } from './Sidebar';
 
 type Props = {
   children?: React.ReactNode;
+  PageHeaderComponent?: React.ReactNode;
 };
 
-const MainLayout = ({ children }: Props) => {
+const MainLayout = ({ children, PageHeaderComponent }: Props) => {
   return (
     <>
       <div className='hidden sm:grid grid-cols-[20rem_1fr]'>
@@ -21,7 +22,10 @@ const MainLayout = ({ children }: Props) => {
 
           <main className='px-4 pl-2 overflow-y-auto pb-4 h-full'>
             <div className='bg-background border border-grey/20 shadow-sm rounded-xl p-4 min-h-full'>
-              <div className='mx-auto'>{children || 'Main Content'}</div>
+              <div className='mx-auto'>
+                {PageHeaderComponent}
+                {children || 'Main Content'}
+              </div>
             </div>
           </main>
         </div>

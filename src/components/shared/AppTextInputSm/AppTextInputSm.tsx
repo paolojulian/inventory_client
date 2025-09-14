@@ -47,7 +47,8 @@ const AppTextInputSm: FC<AppTextInputSmProps> = ({
       id={id}
       className={cn(
         'peer',
-        'py-2 px-4 border border-grey',
+        'py-3 px-4 border border-neutral-200',
+        'bg-white',
         'outline-foreground',
         {
           'w-full': isFullWidth,

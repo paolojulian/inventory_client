@@ -41,7 +41,8 @@ const ProductsPage = () => {
       />
 
       <MainLayout>
-        <PageHeader title="Products" />
+        <PageHeader title='Products' />
+
         <section id='products-page-filters'>
           <ProductFilters />
         </section>

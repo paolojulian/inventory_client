@@ -10,7 +10,7 @@ type Props = {
 
 const PageHeader = ({ title }: Props) => {
   return (
-    <div className='sticky top-0 inset-x-0'>
+    <div className='sticky top-0 inset-x-0 -px-4'>
       <div className='grid grid-cols-3 bg-neutral-50 items-center px-2 py-4 mb-2'>
         <div>
           <AppIconButton>
