@@ -2,7 +2,6 @@ import AppIconButton from '@/components/shared/AppIconButton';
 import { AppText } from '@/components/shared/AppText';
 import { ChevronLeftIcon } from '@/components/shared/icons';
 import KebabIcon from '@/components/shared/icons/KebabIcon';
-import PlusIcon from '@/components/shared/icons/PlusIcon';
 
 type Props = {
   title: string;
@@ -19,9 +18,6 @@ const PageHeader = ({ title }: Props) => {
         </div>
         <AppText variant={'heading'}>{title}</AppText>
         <div className='flex flex-row items-center gap-1 justify-end'>
-          <AppIconButton>
-            <PlusIcon />
-          </AppIconButton>
           <AppIconButton>
             <KebabIcon />
           </AppIconButton>
