@@ -15,7 +15,7 @@ const BottomBar = () => {
   const isTabActive = (link: string): boolean => location.pathname === link;
 
   return (
-    <div className='shadow-[0_-8px_16px_0px_rgba(0,0,0,0.1)] rounded-t-2xl h-full w-full flex items-center justify-center'>
+    <div className='shadow-[0_-8px_16px_0px_rgba(0,0,0,0.1)] rounded-t-2xl h-full w-full flex items-center justify-center bg-white'>
       <NavItem
         title='Home'
         href={URLS.links.v1.dashboard}
