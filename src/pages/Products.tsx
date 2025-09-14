@@ -3,6 +3,7 @@ import AddProduct from '@/components/moduled/products/AddProduct';
 import EditProduct from '@/components/moduled/products/EditProduct';
 import ProductFilters from '@/components/moduled/products/ProductFilters';
 import ProductList from '@/components/moduled/products/ProductList';
+import PageHeader from '@/components/shared/PageHeader';
 import { useProductStore } from '@/stores/product.store';
 import { PRODUCT_MOCKS } from '@/tests/mocks/product.mock';
 import { useState } from 'react';
@@ -13,7 +14,6 @@ export type SortBy = 'name' | 'sku' | 'price';
 export type FilterStatus = 'all' | 'active' | 'inactive';
 
 const ProductsPage = () => {
-  const [status, setStatus] = useState<FilterStatus>('all');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
   const totalPages = Math.ceil(PRODUCT_MOCKS.length / itemsPerPage);
@@ -41,8 +41,9 @@ const ProductsPage = () => {
       />
 
       <MainLayout>
+        <PageHeader title="Products" />
         <section id='products-page-filters'>
-          <ProductFilters status={status} setStatus={setStatus} />
+          <ProductFilters />
         </section>
 
         <section id='products-page-table'>

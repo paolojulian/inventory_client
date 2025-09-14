@@ -1,11 +1,18 @@
 import type { Product } from '@/domain/product.domain';
 import { create } from 'zustand';
 
+export type FilterPriceRange = {
+  min?: number;
+  max?: number;
+};
+export type FilterStatus = 'all' | 'active' | 'inactive';
+
 export interface ProductFilters {
   search: string;
-  status: 'all' | 'active' | 'inactive';
+  status: FilterStatus;
   sortBy: 'name' | 'price' | 'sku' | 'status';
   sortOrder: 'asc' | 'desc' | 'default';
+  priceRange: FilterPriceRange;
 }
 
 export interface ProductStore {
@@ -21,6 +28,7 @@ export interface ProductStore {
   setLoading: (loading: boolean) => void;
   setError: (error: string | null) => void;
   updateFilters: (filters: Partial<ProductFilters>) => void;
+  updateStatusFilter: (status: FilterStatus) => void;
   resetFilters: () => void;
   setSelectedEditProduct: (product: Product | null) => void;
 
@@ -33,6 +41,10 @@ const initialFilters: ProductFilters = {
   status: 'all',
   sortBy: 'name',
   sortOrder: 'asc',
+  priceRange: {
+    min: undefined,
+    max: undefined,
+  },
 };
 
 export const useProductStore = create<ProductStore>((set, get) => ({
@@ -49,6 +61,10 @@ export const useProductStore = create<ProductStore>((set, get) => ({
   updateFilters: (newFilters) =>
     set((state) => ({
       filters: { ...state.filters, ...newFilters },
+    })),
+  updateStatusFilter: (status) =>
+    set((state) => ({
+      filters: { ...state.filters, status },
     })),
   resetFilters: () => set({ filters: initialFilters }),
 

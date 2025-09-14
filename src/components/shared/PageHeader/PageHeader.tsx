@@ -1,0 +1,34 @@
+import AppIconButton from '@/components/shared/AppIconButton';
+import { AppText } from '@/components/shared/AppText';
+import { ChevronLeftIcon } from '@/components/shared/icons';
+import KebabIcon from '@/components/shared/icons/KebabIcon';
+import PlusIcon from '@/components/shared/icons/PlusIcon';
+
+type Props = {
+  title: string;
+};
+
+const PageHeader = ({ title }: Props) => {
+  return (
+    <div className='sticky top-0 inset-x-0'>
+      <div className='grid grid-cols-3 bg-neutral-50 items-center px-2 py-4 mb-2'>
+        <div>
+          <AppIconButton>
+            <ChevronLeftIcon />
+          </AppIconButton>
+        </div>
+        <AppText variant={'heading'}>{title}</AppText>
+        <div className='flex flex-row items-center gap-1 justify-end'>
+          <AppIconButton>
+            <PlusIcon />
+          </AppIconButton>
+          <AppIconButton>
+            <KebabIcon />
+          </AppIconButton>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default PageHeader;

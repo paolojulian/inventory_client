@@ -20,7 +20,7 @@ const ProductListMobile = ({
         onPageChange={setCurrentPage}
       />
       {items.map((item) => (
-        <div className='bg-white p-4 border border-neutral-400'>
+        <div key={item.id} className='bg-white p-4 border border-neutral-400'>
           <AppText className='text-neutral-600'>
             #{item.id} {item.name}
           </AppText>

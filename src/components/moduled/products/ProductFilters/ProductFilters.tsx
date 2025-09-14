@@ -1,12 +1,13 @@
 import { AppRadioPill, AppText, AppTextInputSm } from '@/components/shared';
 import type { FilterStatus } from '@/pages/Products';
+import { useProductStore } from '@/stores/product.store';
+import { useShallow } from 'zustand/react/shallow';
 
-type Props = {
-  status: FilterStatus;
-  setStatus: (status: FilterStatus) => void;
-};
+const ProductFilters = () => {
+  const [status, updateStatusFilter] = useProductStore(
+    useShallow((state) => [state.filters.status, state.updateStatusFilter])
+  );
 
-const ProductFilters = ({ setStatus, status }: Props) => {
   return (
     <div className='flex flex-col gap-2 sm:gap-4 mt-2 mb-8'>
       <section id='filters-name'>
@@ -22,29 +23,29 @@ const ProductFilters = ({ setStatus, status }: Props) => {
 
         <AppRadioPill
           label='All'
-          id='all'
+          id='filter-status-all'
           name='status'
           value={'all' satisfies FilterStatus}
           checked={status === 'all'}
-          onChange={(e) => setStatus(e.target.value as FilterStatus)}
+          onChange={(e) => updateStatusFilter(e.target.value as FilterStatus)}
         />
 
         <AppRadioPill
           label='Active'
-          id='active'
+          id='filter-status-active'
           name='status'
           value={'active' satisfies FilterStatus}
           checked={status === 'active'}
-          onChange={(e) => setStatus(e.target.value as FilterStatus)}
+          onChange={(e) => updateStatusFilter(e.target.value as FilterStatus)}
         />
 
         <AppRadioPill
           label='Inactive'
-          id='inactive'
+          id='filter-status-inactive'
           name='status'
           value={'inactive' satisfies FilterStatus}
           checked={status === 'inactive'}
-          onChange={(e) => setStatus(e.target.value as FilterStatus)}
+          onChange={(e) => updateStatusFilter(e.target.value as FilterStatus)}
         />
       </section>
 
