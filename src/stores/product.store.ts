@@ -29,6 +29,9 @@ export interface ProductStore {
   setError: (error: string | null) => void;
   updateFilters: (filters: Partial<ProductFilters>) => void;
   updateStatusFilter: (status: FilterStatus) => void;
+  updatePriceRangeFilter: (min?: number, max?: number) => void;
+  updatePriceRangeMinFilter: (min?: number) => void;
+  updatePriceRangeMaxFilter: (max?: number) => void;
   resetFilters: () => void;
   setSelectedEditProduct: (product: Product | null) => void;
 
@@ -65,6 +68,36 @@ export const useProductStore = create<ProductStore>((set, get) => ({
   updateStatusFilter: (status) =>
     set((state) => ({
       filters: { ...state.filters, status },
+    })),
+  updatePriceRangeFilter: (min, max) =>
+    set((state) => ({
+      filters: {
+        ...state.filters,
+        priceRange: {
+          min,
+          max,
+        },
+      },
+    })),
+  updatePriceRangeMinFilter: (min) =>
+    set((state) => ({
+      filters: {
+        ...state.filters,
+        priceRange: {
+          ...state.filters.priceRange,
+          min,
+        },
+      },
+    })),
+  updatePriceRangeMaxFilter: (max) =>
+    set((state) => ({
+      filters: {
+        ...state.filters,
+        priceRange: {
+          ...state.filters.priceRange,
+          max,
+        },
+      },
     })),
   resetFilters: () => set({ filters: initialFilters }),
 

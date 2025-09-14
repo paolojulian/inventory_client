@@ -11,7 +11,8 @@ const BottomSheetModal = ({ onClose, isOpen, children }: Props) => {
   return (
     <div
       className={cn(
-        'fixed inset-0 transition-opacity flex flex-col items-center justify-center',
+        'fixed inset-0 transition-opacity flex flex-col items-center justify-end',
+        'z-50',
         {
           'pointer-events-auto opaciy-100': isOpen,
           'pointer-events-none opacity-0': !isOpen,
@@ -27,7 +28,7 @@ const BottomSheetModal = ({ onClose, isOpen, children }: Props) => {
       {/* Content */}
       <div
         className={cn(
-          'relative bg-white rounded-2xl shadow-2xl transition-transform duration-100 w-fit',
+          'relative bg-white rounded-t-2xl shadow-2xl transition-transform duration-100 w-fit',
           {
             'translate-y-0': isOpen,
             'translate-y-full': !isOpen,

@@ -1,6 +1,6 @@
 import { useAddEditProductForm } from '@/components/moduled/products/hooks/useAddEditProductForm';
 import { AddEditProductForm } from '@/components/moduled/products/shared';
-import BottomSheetModal from '@/components/shared/BottomSheetModal';
+import { BottomSheetModal } from '@/components/shared';
 import type { Product } from '@/domain/product.domain';
 import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';

@@ -5,5 +5,6 @@ export { AppTextInput } from './AppTextInput';
 export { AppTextInputSm } from './AppTextInputSm';
 export { Hoverable } from './Hoverable';
 export { Popper } from './Popper';
+export { default as BottomSheetModal } from './BottomSheetModal';
 export type { PopperPlacement } from './Popper';
 
