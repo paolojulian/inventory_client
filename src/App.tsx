@@ -11,6 +11,7 @@ import InventoryPage from '@/pages/Inventory';
 import { NotFoundPage } from '@/pages/NotFound';
 import ToastProvider from './components/providers/ToastProvider';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import AddProductPage from '@/pages/Products/add';
 
 const queryClient = new QueryClient();
 
@@ -35,10 +36,18 @@ const App = () => {
               }
             ></Route>
             <Route
-              path={URLS.links.v1.products}
+              path={URLS.links.v1.products.index}
               element={
                 <ProtectedRoute>
                   <ProductsPage />
+                </ProtectedRoute>
+              }
+            ></Route>
+            <Route
+              path={URLS.links.v1.products.add}
+              element={
+                <ProtectedRoute>
+                  <AddProductPage />
                 </ProtectedRoute>
               }
             ></Route>

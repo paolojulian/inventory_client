@@ -106,7 +106,7 @@ const AppTextArea = forwardRef<HTMLTextAreaElement, AppTextAreaProps>(
           aria-label={id}
           htmlFor={id}
           className={cn(
-            'absolute left-4 top-1/2 -translate-y-1/2',
+            'absolute left-4 top-4',
             'text-grey',
             'pointer-events-none transition-all ease-in-out',
             'peer-placeholder-shown:opacity-100',

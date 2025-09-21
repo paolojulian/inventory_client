@@ -1,3 +1,4 @@
+import { getCreateButtonLink } from '@/components/layouts/MainLayout/BottomBar.utils';
 import { AppText } from '@/components/shared';
 import ClipboardDocumentListIcon from '@/components/shared/icons/ClipboardDocumentListIcon';
 import CubeIcon from '@/components/shared/icons/CubeIcon';
@@ -13,6 +14,8 @@ const BottomBar = () => {
   const location = useLocation();
 
   const isTabActive = (link: string): boolean => location.pathname === link;
+
+  const createButtonLink = getCreateButtonLink(location.pathname);
 
   return (
     <div className='shadow-[0_-8px_16px_0px_rgba(0,0,0,0.1)] rounded-t-2xl h-full w-full flex items-center justify-center bg-white'>
@@ -32,11 +35,14 @@ const BottomBar = () => {
         <CubeIcon />
       </NavItem>
 
-      <button className='bg-neutral-300 rounded-full p-1 justify-center items-center flex active:scale-95'>
+      <a
+        href={createButtonLink}
+        className='bg-neutral-300 rounded-full p-1 justify-center items-center flex active:scale-95'
+      >
         <div className='size-14 bg-neutral-900 rounded-full justify-center items-center flex'>
           <PlusIcon className='text-white size-8' />
         </div>
-      </button>
+      </a>
 
       <NavItem
         title='Supply'
@@ -48,8 +54,8 @@ const BottomBar = () => {
 
       <NavItem
         title='Product'
-        href={URLS.links.v1.products}
-        isActive={isTabActive(URLS.links.v1.products)}
+        href={URLS.links.v1.products.index}
+        isActive={isTabActive(URLS.links.v1.products.index)}
       >
         <TagIcon />
       </NavItem>

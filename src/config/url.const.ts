@@ -17,7 +17,10 @@ export const URLS = {
     v1: {
       login: '/login',
       dashboard: '/',
-      products: '/products',
+      products: {
+        index: '/products', 
+        add: '/products/add'
+      },
       stockEntries: '/stock-entries',
       inventory: '/inventory',
     },

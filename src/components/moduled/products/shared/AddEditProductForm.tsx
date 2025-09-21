@@ -24,7 +24,7 @@ const AddEditProductForm = ({
   onSubmit,
   control,
   nameInputRef,
-  titleText = 'Add Product',
+  titleText,
 }: Props) => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -32,17 +32,22 @@ const AddEditProductForm = ({
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form
+      onSubmit={handleSubmit}
+      className='h-full flex flex-col justify-between'
+    >
       {/* header */}
-      <section>
-        <div className='flex flex-row justify-between'>
-          <AppText variant={'heading'}>{titleText}</AppText>
-          <AppIconButton onClick={onClose} type='button'>
-            <XMarkIcon />
-          </AppIconButton>
-        </div>
-        <AppDivider className='my-2 mb-5' />
-      </section>
+      {!!titleText && (
+        <section>
+          <div className='flex flex-row justify-between'>
+            <AppText variant={'heading'}>{titleText}</AppText>
+            <AppIconButton onClick={onClose} type='button'>
+              <XMarkIcon />
+            </AppIconButton>
+          </div>
+          <AppDivider className='my-2 mb-5' />
+        </section>
+      )}
 
       {/* body */}
       <section className='flex flex-col gap-4'>
@@ -109,8 +114,13 @@ const AddEditProductForm = ({
             />
           )}
         />
-        <AppButton type='submit'>Save</AppButton>
       </section>
+
+      <div className='mt-4'>
+        <AppButton isFullWidth type='submit'>
+          Save
+        </AppButton>
+      </div>
     </form>
   );
 };
