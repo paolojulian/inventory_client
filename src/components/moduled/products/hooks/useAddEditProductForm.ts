@@ -19,11 +19,12 @@ const DEFAULT_VALUES: AddProductFormData = {
 };
 
 type Props = {
+  onSuccess?: () => void;
   initialValues?: AddProductFormData;
 };
 
 export const useAddEditProductForm = (
-  { initialValues }: Props = { initialValues: undefined }
+  { onSuccess, initialValues }: Props = { initialValues: undefined }
 ) => {
   const {
     control,
@@ -53,6 +54,9 @@ export const useAddEditProductForm = (
     }
 
     toast.success('Product added successfully.');
+    if (onSuccess) {
+      onSuccess();
+    }
   };
 
   const onSubmit = handleSubmit(onAddProduct);

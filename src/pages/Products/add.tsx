@@ -12,8 +12,11 @@ export type FilterStatus = 'all' | 'active' | 'inactive';
 const AddProductPage = () => {
   const navigate = useNavigate();
 
+  const handleSuccess = () => navigate(URLS.links.v1.products.index);
   const nameInputRef = useRef<HTMLInputElement>(null);
-  const { control, onSubmit } = useAddEditProductForm();
+  const { control, onSubmit } = useAddEditProductForm({
+    onSuccess: handleSuccess,
+  });
 
   const onClose = () => {};
 
