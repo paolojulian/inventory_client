@@ -33,7 +33,7 @@ const EditProduct = ({ onClose, product }: Props) => {
 
   return createPortal(
     <BottomSheetModal onClose={onClose} isOpen={isModalOpen}>
-      <div className='min-w-[600px] p-8'>
+      <div className='w-screen sm:min-w-[600px] p-8'>
         <AddEditProductForm
           onClose={onClose}
           onSubmit={onSubmit}

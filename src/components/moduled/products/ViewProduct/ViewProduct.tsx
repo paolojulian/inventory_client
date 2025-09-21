@@ -17,9 +17,16 @@ const ViewProduct = () => {
     ])
   );
 
+  const setSelectedEditProduct = useProductStore(
+    (state) => state.setSelectedEditProduct
+  );
+
   const handleClose = () => setSelectedViewProduct(null);
   const handleDelete = () => {
     confirm(`Are you sure you want to archive this product?`);
+  };
+  const handleEdit = () => {
+    setSelectedEditProduct(selectedViewProduct);
   };
 
   return (
@@ -29,14 +36,13 @@ const ViewProduct = () => {
     >
       {selectedViewProduct ? (
         <div className='h-full flex flex-col overflow-y-auto'>
-          <PageHeader
-            onBack={handleClose}
-            title=''
-            variant='black'
-            shouldHideKebab={true}
-          />
-
           <section id='view-product-header'>
+            <PageHeader
+              onBack={handleClose}
+              title=''
+              variant='black'
+              shouldHideKebab={true}
+            />
             <div className='bg-black text-white p-4 pb-6'>
               <div className='space-y-1'>
                 <AppText>
@@ -79,7 +85,11 @@ const ViewProduct = () => {
               >
                 <TrashIcon className='size-6 text-red-800' />
               </AppIconButton>
-              <AppIconButton className='size-12' variant='with-borders'>
+              <AppIconButton
+                onClick={handleEdit}
+                className='size-12'
+                variant='with-borders'
+              >
                 <PencilIcon className='size-6' />
               </AppIconButton>
             </div>

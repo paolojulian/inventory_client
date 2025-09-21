@@ -2,6 +2,7 @@ import type { AddProductFormData } from '@/components/moduled/products/hooks/use
 import { AppButton, AppText, AppTextInput } from '@/components/shared';
 import AppDivider from '@/components/shared/AppDivider';
 import AppIconButton from '@/components/shared/AppIconButton';
+import { AppTextArea } from '@/components/shared/AppTextArea';
 import XMarkIcon from '@/components/shared/icons/XMarkIcon';
 import {
   requiredAndEmptySpacesValidation,
@@ -80,11 +81,12 @@ const AddEditProductForm = ({
           control={control}
           rules={requiredAndEmptySpacesValidation}
           render={({ field, fieldState }) => (
-            <AppTextInput
+            <AppTextArea
               id='description'
               placeholder='Description of the product'
               label='Description'
               errorMessage={fieldState.error?.message}
+              rows={8}
               {...field}
             />
           )}
