@@ -5,6 +5,7 @@ import ProductFilters from '@/components/moduled/products/ProductFilters';
 import ProductList from '@/components/moduled/products/ProductList';
 import ViewProduct from '@/components/moduled/products/ViewProduct';
 import PageHeader from '@/components/shared/PageHeader';
+import { useGetProductList } from '@/hooks/moduled/products';
 import { useProductStore } from '@/stores/product.store';
 import { PRODUCT_MOCKS } from '@/tests/mocks/product.mock';
 import { useState } from 'react';
@@ -16,8 +17,16 @@ export type FilterStatus = 'all' | 'active' | 'inactive';
 
 const ProductsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+  const itemsPerPage = 10;
   const totalPages = Math.ceil(PRODUCT_MOCKS.length / itemsPerPage);
+
+  const { data, isPending, error } = useGetProductList({
+    pager: {
+      page: currentPage,
+      size: itemsPerPage,
+    },
+  });
+  console.log({ data, isPending, error });
 
   // Get current page items
   const startIndex = (currentPage - 1) * itemsPerPage;

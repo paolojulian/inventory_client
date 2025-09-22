@@ -9,7 +9,8 @@ export const URLS = {
       me: () => `${URLS.rest.v1.base()}/auth/me`,
       products: {
         base: () => `${URLS.rest.v1.base()}/products`,
-        list: () => `${URLS.rest.v1.products.base()}`,
+        list: (queryString: string = '') =>
+          `${URLS.rest.v1.products.base()}?${queryString}`,
       },
     },
   },
@@ -18,8 +19,8 @@ export const URLS = {
       login: '/login',
       dashboard: '/',
       products: {
-        index: '/products', 
-        add: '/products/add'
+        index: '/products',
+        add: '/products/add',
       },
       stockEntries: '/stock-entries',
       inventory: '/inventory',
