@@ -4,7 +4,7 @@ export type Product = {
   name: string;
   description: string;
   price: Money;
-  status: 'active' | 'inactive';
+  is_active: boolean;
 };
 
 export type Money = {

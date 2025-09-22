@@ -58,14 +58,10 @@ const ViewProduct = () => {
                   ></AppPill>
                   <AppPill
                     title={
-                      selectedViewProduct.status === 'active'
-                        ? 'Active'
-                        : 'Inactive'
+                      selectedViewProduct.is_active ? 'Active' : 'Inactive'
                     }
                     variant={
-                      selectedViewProduct.status === 'active'
-                        ? 'success'
-                        : 'danger'
+                      selectedViewProduct.is_active ? 'success' : 'danger'
                     }
                   ></AppPill>
                 </div>

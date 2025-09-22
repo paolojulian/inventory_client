@@ -26,9 +26,7 @@ const ProductListMobile = ({ items }: Props) => {
         >
           <div className='flex flex-row items-start justify-between'>
             <div>
-              <AppText>
-                {item.name}
-              </AppText>
+              <AppText>{item.name}</AppText>
               <AppText className='text-neutral-500 uppercase' variant={'small'}>
                 SKU: {item.sku}
               </AppText>
@@ -37,8 +35,8 @@ const ProductListMobile = ({ items }: Props) => {
           </div>
           <div className='flex flex-row items-end justify-between mt-4'>
             <AppPill
-              variant={item.status === 'active' ? 'success' : 'danger'}
-              title={item.status === 'active' ? 'Active' : 'Inactive'}
+              variant={item.is_active ? 'success' : 'danger'}
+              title={item.is_active ? 'Active' : 'Inactive'}
             />
             <AppText>{formatMoney(item.price.cents)}</AppText>
           </div>
