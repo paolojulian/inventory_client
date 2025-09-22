@@ -15,7 +15,7 @@ type ProductListParams = {
 
 export async function ProductListInt(
   params: ProductListParams
-): Promise<Error | ProductListResponse> {
+): Promise<ProductListResponse> {
   try {
     const queryParams = new URLSearchParams();
     queryParams.append('page', params.pager.page.toString());

@@ -7,7 +7,6 @@ import ViewProduct from '@/components/moduled/products/ViewProduct';
 import PageHeader from '@/components/shared/PageHeader';
 import { useGetProductList } from '@/hooks/moduled/products';
 import { useProductStore } from '@/stores/product.store';
-import { PRODUCT_MOCKS } from '@/tests/mocks/product.mock';
 import { useState } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 
@@ -18,20 +17,13 @@ export type FilterStatus = 'all' | 'active' | 'inactive';
 const ProductsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
-  const totalPages = Math.ceil(PRODUCT_MOCKS.length / itemsPerPage);
 
-  const { data, isPending, error } = useGetProductList({
+  const { products, pager } = useGetProductList({
     pager: {
       page: currentPage,
       size: itemsPerPage,
     },
   });
-  console.log({ data, isPending, error });
-
-  // Get current page items
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const currentItems = PRODUCT_MOCKS.slice(startIndex, endIndex);
 
   const [selectedEditProduct, setSelectedEditProduct] = useProductStore(
     useShallow((state) => [
@@ -62,9 +54,9 @@ const ProductsPage = () => {
           <ProductList
             onEditProduct={setSelectedEditProduct}
             setCurrentPage={setCurrentPage}
-            currentPage={currentPage}
-            items={currentItems}
-            totalPages={totalPages}
+            currentPage={pager?.current_page || 1}
+            items={products}
+            totalPages={pager?.total_pages || 0}
           />
         </section>
 

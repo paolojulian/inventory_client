@@ -27,7 +27,7 @@ const ProductListMobile = ({ items }: Props) => {
           <div className='flex flex-row items-start justify-between'>
             <div>
               <AppText>
-                #{item.id} {item.name}
+                {item.name}
               </AppText>
               <AppText className='text-neutral-500 uppercase' variant={'small'}>
                 SKU: {item.sku}

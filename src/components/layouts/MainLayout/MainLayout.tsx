@@ -32,7 +32,7 @@ const MainLayout = ({ children, PageHeaderComponent }: Props) => {
       </div>
 
       <div className='sm:hidden'>
-        <main className='px-2 mb-24 w-full'>{children}</main>
+        <main className='px-2 pb-24 w-full'>{children}</main>
         <div className='fixed bottom-0 inset-x-0 h-20'>
           <BottomBar />
         </div>

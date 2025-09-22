@@ -8,8 +8,15 @@ type Props = {
 };
 
 export const useGetProductList = ({ pager }: Props) => {
-  return useQuery({
+  const { data, isPending, error } = useQuery({
     queryKey: [ProductQueryKeys.list(pager)],
     queryFn: () => ProductListInt({ pager }),
   });
+
+  return {
+    products: data?.products || [],
+    pager: data?.pager || undefined,
+    isPending,
+    error,
+  };
 };
