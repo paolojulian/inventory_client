@@ -1,22 +1,36 @@
 import { ProductQueryKeys } from '@/hooks/moduled/products/products.query-keys';
-import type { PagerInput } from '@/interfaces/rest.types';
 import { ProductListInt } from '@/interfaces/rest/products/product-list';
-import { useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 
-type Props = {
-  pager: PagerInput;
-};
+const PAGE_SIZE = 20;
 
-export const useGetProductList = ({ pager }: Props) => {
-  const { data, isPending, error } = useQuery({
-    queryKey: [ProductQueryKeys.list(pager)],
-    queryFn: () => ProductListInt({ pager }),
-  });
+export const useGetProductList = () => {
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    useInfiniteQuery({
+      initialPageParam: 1,
+      queryKey: [ProductQueryKeys.list()],
+      queryFn: ({ pageParam }) => {
+        return ProductListInt({
+          pager: {
+            page: pageParam,
+            size: PAGE_SIZE,
+          },
+        });
+      },
+      getNextPageParam: (lastPage) => {
+        const { current_page, total_pages } = lastPage.pager;
+
+        return current_page < total_pages ? current_page + 1 : undefined;
+      },
+    });
 
   return {
-    products: data?.products || [],
-    pager: data?.pager || undefined,
-    isPending,
-    error,
+    data,
+    products: data?.pages.flatMap((page) => page.products) ?? [],
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    currentPage: data?.pages[data.pages.length - 1]?.pager.current_page ?? 1,
+    totalPages: data?.pages[data.pages.length - 1]?.pager.total_pages ?? 1,
   };
 };

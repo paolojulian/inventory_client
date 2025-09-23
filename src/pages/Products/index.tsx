@@ -4,10 +4,10 @@ import EditProduct from '@/components/moduled/products/EditProduct';
 import ProductFilters from '@/components/moduled/products/ProductFilters';
 import ProductList from '@/components/moduled/products/ProductList';
 import ViewProduct from '@/components/moduled/products/ViewProduct';
+import { InfiniteScroll } from '@/components/shared';
 import PageHeader from '@/components/shared/PageHeader';
 import { useGetProductList } from '@/hooks/moduled/products';
 import { useProductStore } from '@/stores/product.store';
-import { useState } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 
 export type SortTypes = 'asc' | 'desc' | 'default';
@@ -15,15 +15,14 @@ export type SortBy = 'name' | 'sku' | 'price';
 export type FilterStatus = 'all' | 'active' | 'inactive';
 
 const ProductsPage = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
-
-  const { products, pager } = useGetProductList({
-    pager: {
-      page: currentPage,
-      size: itemsPerPage,
-    },
-  });
+  const {
+    products,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    currentPage,
+    totalPages,
+  } = useGetProductList();
 
   const [selectedEditProduct, setSelectedEditProduct] = useProductStore(
     useShallow((state) => [
@@ -31,6 +30,8 @@ const ProductsPage = () => {
       state.setSelectedEditProduct,
     ])
   );
+
+  console.log({ hasNextPage, isFetchingNextPage });
 
   const handleCloseEditProduct = () => setSelectedEditProduct(null);
 
@@ -44,20 +45,29 @@ const ProductsPage = () => {
       <ViewProduct />
 
       <MainLayout>
-        <PageHeader title='Products' shouldHideBack shouldHideKebab />
+        <div className='mt-2'>
+          <PageHeader title='Products' shouldHideBack shouldHideKebab />
+        </div>
 
         <section id='products-page-filters' className='mt-2'>
           <ProductFilters />
         </section>
 
         <section id='products-page-table'>
-          <ProductList
-            onEditProduct={setSelectedEditProduct}
-            setCurrentPage={setCurrentPage}
-            currentPage={pager?.current_page || 1}
-            items={products}
-            totalPages={pager?.total_pages || 0}
-          />
+          <InfiniteScroll
+            useWindow
+            onLoadMore={fetchNextPage}
+            hasNextPage={hasNextPage}
+            isLoading={isFetchingNextPage}
+          >
+            <ProductList
+              onEditProduct={setSelectedEditProduct}
+              setCurrentPage={() => {}}
+              currentPage={currentPage}
+              items={products}
+              totalPages={totalPages}
+            />
+          </InfiniteScroll>
         </section>
 
         <AddProduct />
