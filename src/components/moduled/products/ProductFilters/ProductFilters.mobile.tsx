@@ -6,8 +6,9 @@ import {
   BottomSheetModal,
 } from '@/components/shared';
 import { AdjustmentsHorizontalIcon } from '@/components/shared/icons';
+import { useDebounce } from '@/hooks/useDebounce';
 import { useProductStore, type FilterStatus } from '@/stores/product.store';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 
 const ProductFiltersMobile = () => {
@@ -15,6 +16,11 @@ const ProductFiltersMobile = () => {
   const [status, updateStatusFilter] = useProductStore(
     useShallow((state) => [state.filters.status, state.updateStatusFilter])
   );
+  const [search, setSearchText] = useProductStore(
+    useShallow((state) => [state.filters.search, state.setSearchText])
+  );
+  const [localSearch, setLocalSearch] = useState(search);
+
   const { priceRange, updatePriceRangeMaxFilter, updatePriceRangeMinFilter } =
     useProductStore(
       useShallow((state) => ({
@@ -23,6 +29,12 @@ const ProductFiltersMobile = () => {
         updatePriceRangeMaxFilter: state.updatePriceRangeMaxFilter,
       }))
     );
+
+  const debouncedSearchTerm = useDebounce(localSearch, 500);
+
+  useEffect(() => {
+    setSearchText(debouncedSearchTerm);
+  }, [debouncedSearchTerm, setSearchText]);
 
   const handleClose = () => setIsFiltering(false);
   const handleReset = () => {
@@ -40,9 +52,11 @@ const ProductFiltersMobile = () => {
         <section id='filters-name'>
           <div className='flex flex-row items-center gap-1'>
             <AppTextInputSm
+              onChange={(e) => setLocalSearch(e.target.value)}
               id='search'
               placeholder='Search by Name/SKU'
               variant='rounded'
+              value={localSearch}
             />
             <button
               className='aspect-square p-3 bg-white border border-neutral-200 rounded-lg active:scale-95'

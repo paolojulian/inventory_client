@@ -36,6 +36,7 @@ export interface ProductStore {
   resetFilters: () => void;
   setSelectedEditProduct: (product: Product | null) => void;
   setSelectedViewProduct: (product: Product | null) => void;
+  setSearchText: (searchText: string) => void;
 
   // Computed
   filteredProducts: () => Product[];
@@ -106,6 +107,13 @@ export const useProductStore = create<ProductStore>((set, get) => ({
 
   setSelectedEditProduct: (product) => set({ selectedEditProduct: product }),
   setSelectedViewProduct: (product) => set({ selectedViewProduct: product }),
+  setSearchText: (searchText) =>
+    set((state) => ({
+      filters: {
+        ...state.filters,
+        search: searchText,
+      },
+    })),
 
   filteredProducts: () => {
     const { products, filters } = get();
@@ -124,8 +132,8 @@ export const useProductStore = create<ProductStore>((set, get) => ({
 
     // Filter by status
     if (filters.status !== 'all') {
-      filtered = filtered.filter(
-        (product) => product.status === filters.status
+      filtered = filtered.filter((product) =>
+        filters.status === 'active' ? product.is_active : !product.is_active
       );
     }
 
@@ -146,10 +154,6 @@ export const useProductStore = create<ProductStore>((set, get) => ({
         case 'sku':
           aValue = a.sku.toLowerCase();
           bValue = b.sku.toLowerCase();
-          break;
-        case 'status':
-          aValue = a.status;
-          bValue = b.status;
           break;
         default:
           aValue = a.name.toLowerCase();

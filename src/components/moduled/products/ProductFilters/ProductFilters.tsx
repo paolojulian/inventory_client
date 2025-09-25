@@ -9,6 +9,10 @@ const ProductFilters = () => {
     useShallow((state) => [state.filters.status, state.updateStatusFilter])
   );
 
+  const [search, setSearchText] = useProductStore(
+    useShallow((state) => [state.filters.search, state.setSearchText])
+  );
+
   return (
     <>
       <div className='block sm:hidden'>
@@ -19,9 +23,11 @@ const ProductFilters = () => {
         <div className='flex flex-col gap-2 sm:gap-4 mt-2 mb-8'>
           <section id='filters-name'>
             <AppTextInputSm
+              onChange={(e) => setSearchText(e.target.value)}
               id='search'
               placeholder='Search by Name/SKU'
               variant='rounded'
+              value={search}
             />
           </section>
 
