@@ -1,20 +1,33 @@
 import { ProductQueryKeys } from '@/hooks/moduled/products/products.query-keys';
-import { ProductListInt } from '@/interfaces/rest/products/product-list';
+import {
+  ProductListInt,
+  type ProductListParams,
+} from '@/interfaces/rest/products/product-list';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
 const PAGE_SIZE = 20;
 
-export const useGetProductList = () => {
+export const useGetProductList = ({
+  filter,
+}: {
+  filter: ProductListParams['filter'];
+}) => {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useInfiniteQuery({
       initialPageParam: 1,
-      queryKey: [ProductQueryKeys.list()],
+      queryKey: [
+        ProductQueryKeys.list(),
+        {
+          filter,
+        },
+      ],
       queryFn: ({ pageParam }) => {
         return ProductListInt({
           pager: {
             page: pageParam,
             size: PAGE_SIZE,
           },
+          filter,
         });
       },
       getNextPageParam: (lastPage) => {

@@ -9,8 +9,12 @@ type ProductListResponse = {
   pager: PagerOutput;
 };
 
-type ProductListParams = {
+export type ProductListParams = {
   pager: PagerInput;
+  filter?: {
+    search_text?: string;
+    is_active?: boolean;
+  };
 };
 
 export async function ProductListInt(
@@ -20,6 +24,17 @@ export async function ProductListInt(
     const queryParams = new URLSearchParams();
     queryParams.append('page', params.pager.page.toString());
     queryParams.append('size', params.pager.size.toString());
+
+    if (typeof params.filter?.is_active === 'boolean') {
+      queryParams.append(
+        'filter.is_active',
+        params.filter.is_active ? '1' : '0'
+      );
+    }
+
+    if (params.filter?.search_text) {
+      queryParams.append('filter.search_text', params.filter.search_text);
+    }
 
     const queryString = queryParams.toString();
 

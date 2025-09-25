@@ -15,6 +15,14 @@ export type SortBy = 'name' | 'sku' | 'price';
 export type FilterStatus = 'all' | 'active' | 'inactive';
 
 const ProductsPage = () => {
+  const [selectedEditProduct, setSelectedEditProduct] = useProductStore(
+    useShallow((state) => [
+      state.selectedEditProduct,
+      state.setSelectedEditProduct,
+    ])
+  );
+  const filters = useProductStore((state) => state.filters);
+
   const {
     products,
     fetchNextPage,
@@ -22,16 +30,13 @@ const ProductsPage = () => {
     isFetchingNextPage,
     currentPage,
     totalPages,
-  } = useGetProductList();
-
-  const [selectedEditProduct, setSelectedEditProduct] = useProductStore(
-    useShallow((state) => [
-      state.selectedEditProduct,
-      state.setSelectedEditProduct,
-    ])
-  );
-
-  console.log({ hasNextPage, isFetchingNextPage });
+  } = useGetProductList({
+    filter: {
+      is_active:
+        filters.status === 'all' ? undefined : filters.status === 'active',
+      search_text: filters.search,
+    },
+  });
 
   const handleCloseEditProduct = () => setSelectedEditProduct(null);
 
