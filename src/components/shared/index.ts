@@ -1,4 +1,5 @@
 export { AppButton } from './AppButton';
+export { AppChip } from './AppChip';
 export { AppRadioPill } from './AppRadioPill';
 export { AppText } from './AppText';
 export { AppTextInput } from './AppTextInput';

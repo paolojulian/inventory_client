@@ -1,13 +1,13 @@
 import {
   AppButton,
-  AppRadioPill,
+  AppChip,
   AppText,
   AppTextInputSm,
   BottomSheetModal,
 } from '@/components/shared';
 import { AdjustmentsHorizontalIcon } from '@/components/shared/icons';
 import { useDebounce } from '@/hooks/useDebounce';
-import { useProductStore, type FilterStatus } from '@/stores/product.store';
+import { useProductStore } from '@/stores/product.store';
 import { useEffect, useState } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 
@@ -30,7 +30,7 @@ const ProductFiltersMobile = () => {
       }))
     );
 
-  const debouncedSearchTerm = useDebounce(localSearch, 500);
+  const debouncedSearchTerm = useDebounce(localSearch, 300);
 
   useEffect(() => {
     setSearchText(debouncedSearchTerm);
@@ -72,38 +72,21 @@ const ProductFiltersMobile = () => {
           <section id='filters-status'>
             <AppText className='text-gray-500'>Status:</AppText>
 
-            <div className='flex items-center gap-4'>
-              <AppRadioPill
+            <div className='flex items-center gap-2 flex-wrap'>
+              <AppChip
                 label='All'
-                id='filter-status-all'
-                name='status'
-                value={'all' satisfies FilterStatus}
-                checked={status === 'all'}
-                onChange={(e) =>
-                  updateStatusFilter(e.target.value as FilterStatus)
-                }
+                isSelected={status === 'all'}
+                onClick={() => updateStatusFilter('all')}
               />
-
-              <AppRadioPill
+              <AppChip
                 label='Active'
-                id='filter-status-active'
-                name='status'
-                value={'active' satisfies FilterStatus}
-                checked={status === 'active'}
-                onChange={(e) =>
-                  updateStatusFilter(e.target.value as FilterStatus)
-                }
+                isSelected={status === 'active'}
+                onClick={() => updateStatusFilter('active')}
               />
-
-              <AppRadioPill
+              <AppChip
                 label='Inactive'
-                id='filter-status-inactive'
-                name='status'
-                value={'inactive' satisfies FilterStatus}
-                checked={status === 'inactive'}
-                onChange={(e) =>
-                  updateStatusFilter(e.target.value as FilterStatus)
-                }
+                isSelected={status === 'inactive'}
+                onClick={() => updateStatusFilter('inactive')}
               />
             </div>
           </section>
