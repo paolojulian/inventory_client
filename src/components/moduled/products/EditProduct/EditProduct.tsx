@@ -12,6 +12,7 @@ type Props = {
 
 const EditProduct = ({ onClose, product }: Props) => {
   const { onResetForm, onSubmit, control } = useAddEditProductForm({
+    productId: product?.id,
     initialValues: product
       ? {
           description: product.description,
@@ -20,6 +21,9 @@ const EditProduct = ({ onClose, product }: Props) => {
           price: product.price.cents,
         }
       : undefined,
+    onSuccess: () => {
+      onClose();
+    },
   });
 
   const isModalOpen: boolean = !!product;

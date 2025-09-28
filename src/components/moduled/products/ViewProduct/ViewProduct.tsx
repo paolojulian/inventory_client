@@ -6,16 +6,19 @@ import PencilIcon from '@/components/shared/icons/PencilIcon';
 import TrashIcon from '@/components/shared/icons/TrashIcon';
 import PageHeader from '@/components/shared/PageHeader';
 import { useProductStore } from '@/stores/product.store';
+import { useFindProductInCache } from '@/hooks/moduled/products/useFindProductInCache';
 import { formatMoney } from '@/utils/money';
 import { useShallow } from 'zustand/react/shallow';
 
 const ViewProduct = () => {
-  const [selectedViewProduct, setSelectedViewProduct] = useProductStore(
+  const [selectedViewProductId, setSelectedViewProduct] = useProductStore(
     useShallow((state) => [
-      state.selectedViewProduct,
+      state.selectedViewProduct?.id || null,
       state.setSelectedViewProduct,
     ])
   );
+
+  const selectedViewProduct = useFindProductInCache(selectedViewProductId);
 
   const setSelectedEditProduct = useProductStore(
     (state) => state.setSelectedEditProduct
@@ -26,7 +29,9 @@ const ViewProduct = () => {
     confirm(`Are you sure you want to archive this product?`);
   };
   const handleEdit = () => {
-    setSelectedEditProduct(selectedViewProduct);
+    if (selectedViewProduct) {
+      setSelectedEditProduct(selectedViewProduct);
+    }
   };
 
   return (

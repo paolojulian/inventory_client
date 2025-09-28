@@ -11,6 +11,7 @@ export const URLS = {
         base: () => `${URLS.rest.v1.base()}/products`,
         list: (queryString: string = '') =>
           `${URLS.rest.v1.products.base()}?${queryString}`,
+        update: (id: string) => `${URLS.rest.v1.products.base()}/${id}`,
       },
     },
   },

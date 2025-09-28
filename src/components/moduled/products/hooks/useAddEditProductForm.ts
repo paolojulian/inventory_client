@@ -1,5 +1,5 @@
+import useUpdateProduct from '@/hooks/moduled/products/useUpdateProduct';
 import { toast } from '@/hooks/useToast';
-import { useMutation } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 
 export type AddProductFormData = {
@@ -19,12 +19,16 @@ const DEFAULT_VALUES: AddProductFormData = {
 };
 
 type Props = {
+  productId?: string;
   onSuccess?: () => void;
   initialValues?: AddProductFormData;
 };
 
 export const useAddEditProductForm = (
-  { onSuccess, initialValues }: Props = { initialValues: undefined }
+  { onSuccess, initialValues, productId }: Props = {
+    initialValues: undefined,
+    productId: '',
+  }
 ) => {
   const {
     control,
@@ -35,31 +39,30 @@ export const useAddEditProductForm = (
     defaultValues: initialValues || DEFAULT_VALUES,
   });
 
-  const { mutateAsync } = useMutation({
-    mutationKey: ['AddProduct'],
-    mutationFn: () => {
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          resolve(true);
-        }, 1000);
+  const { mutateAsync } = useUpdateProduct();
+
+  const onSubmit = handleSubmit(async (data) => {
+    if (productId) {
+      const result = await mutateAsync({
+        id: productId,
+        data: {
+          description: data.description,
+          name: data.name,
+          price: Number(data.price),
+          sku: data.sku,
+        },
       });
-    },
+      if (!result) {
+        toast.error('Unable to update product, please try again later.');
+        return;
+      }
+
+      toast.success('Product updated successfully.');
+      if (onSuccess) {
+        onSuccess();
+      }
+    }
   });
-
-  const onAddProduct = async () => {
-    const result = await mutateAsync();
-    if (!result) {
-      toast.error('Unable to save product, please try again later.');
-      return;
-    }
-
-    toast.success('Product added successfully.');
-    if (onSuccess) {
-      onSuccess();
-    }
-  };
-
-  const onSubmit = handleSubmit(onAddProduct);
   const onResetForm = () => reset(initialValues);
 
   return {

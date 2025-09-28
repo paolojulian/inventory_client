@@ -12,7 +12,7 @@ const BottomSheetModal = ({ onClose, isOpen, children }: Props) => {
     <div
       className={cn(
         'fixed inset-0 transition-opacity flex flex-col items-center justify-end',
-        'z-50',
+        'z-40',
         {
           'pointer-events-auto opaciy-100': isOpen,
           'pointer-events-none opacity-0': !isOpen,

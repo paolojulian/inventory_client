@@ -4,8 +4,9 @@ const ToastContainer = () => {
   const { toasts, removeToast } = useToastStore();
 
   const getToastStyles = (type: string) => {
-    const baseStyles = 'min-w-80 p-4 rounded-lg shadow-lg border-l-4 flex items-center justify-between animate-slide-in';
-    
+    const baseStyles =
+      'min-w-80 p-4 rounded-lg shadow-lg border-l-4 flex items-center justify-between animate-slide-in';
+
     switch (type) {
       case 'success':
         return `${baseStyles} bg-green-50 border-green-500 text-green-800`;
@@ -36,22 +37,19 @@ const ToastContainer = () => {
   if (!toasts.length) return null;
 
   return (
-    <div className="fixed top-4 right-4 z-50 space-y-2">
+    <div className='fixed top-4 right-4 z-50 space-y-2'>
       {toasts.map((toast) => (
-        <div
-          key={toast.id}
-          className={getToastStyles(toast.type)}
-        >
-          <div className="flex items-center">
-            <span className="mr-2 text-lg font-bold">
+        <div key={toast.id} className={getToastStyles(toast.type)}>
+          <div className='flex items-center'>
+            <span className='mr-2 text-lg font-bold'>
               {getIcon(toast.type)}
             </span>
-            <span className="font-medium">{toast.message}</span>
+            <span className='font-medium'>{toast.message}</span>
           </div>
           <button
             onClick={() => removeToast(toast.id)}
-            className="ml-4 text-lg hover:opacity-70 font-bold"
-            aria-label="Close toast"
+            className='ml-4 text-lg hover:opacity-70 font-bold'
+            aria-label='Close toast'
           >
             ×
           </button>

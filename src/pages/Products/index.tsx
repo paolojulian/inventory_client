@@ -8,6 +8,7 @@ import { InfiniteScroll } from '@/components/shared';
 import PageHeader from '@/components/shared/PageHeader';
 import { useGetProductList } from '@/hooks/moduled/products';
 import { useProductStore } from '@/stores/product.store';
+import { useMemo } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 
 export type SortTypes = 'asc' | 'desc' | 'default';
@@ -40,12 +41,20 @@ const ProductsPage = () => {
 
   const handleCloseEditProduct = () => setSelectedEditProduct(null);
 
+  const selectedProductToEdit = useMemo(() => {
+    return (
+      products.find(({ id }) => {
+        return id === selectedEditProduct?.id;
+      }) || null
+    );
+  }, [products, selectedEditProduct]);
+
   return (
     <>
       <EditProduct
-        key={selectedEditProduct?.id}
+        key={selectedProductToEdit?.id}
         onClose={handleCloseEditProduct}
-        product={selectedEditProduct}
+        product={selectedProductToEdit}
       />
       <ViewProduct />
 

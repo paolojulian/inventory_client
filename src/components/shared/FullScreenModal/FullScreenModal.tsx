@@ -10,7 +10,7 @@ type Props = {
 const FullScreenModal = ({ isOpen, children }: Props) => {
   return createPortal(
     <div
-      className={cn('bg-white fixed inset-0 z-50 transition-opacity', {
+      className={cn('bg-white fixed inset-0 z-40 transition-opacity', {
         'pointer-events-auto opacity-100': isOpen,
         'pointer-events-none opacity-0': !isOpen,
       })}

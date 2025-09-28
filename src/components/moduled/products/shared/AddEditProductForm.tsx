@@ -17,6 +17,7 @@ type Props = {
   nameInputRef: Ref<HTMLInputElement>;
   control: Control<AddProductFormData>;
   titleText?: string;
+  saveText?: string;
 };
 
 const AddEditProductForm = ({
@@ -25,6 +26,7 @@ const AddEditProductForm = ({
   control,
   nameInputRef,
   titleText,
+  saveText = 'Save',
 }: Props) => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -118,7 +120,7 @@ const AddEditProductForm = ({
 
       <div className='mt-4'>
         <AppButton isFullWidth type='submit'>
-          Save
+          {saveText}
         </AppButton>
       </div>
     </form>
