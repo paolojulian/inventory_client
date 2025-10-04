@@ -1,5 +1,4 @@
-import useAddProduct from '@/hooks/moduled/products/useAddProduct';
-import useUpdateProduct from '@/hooks/moduled/products/useUpdateProduct';
+import { useAddProduct, useUpdateProduct } from '@/hooks/moduled/products';
 import { toast } from '@/hooks/useToast';
 import { useForm } from 'react-hook-form';
 

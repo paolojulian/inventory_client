@@ -3,7 +3,7 @@ import { URLS } from '../../../config/url.const';
 import type { PagerInput, PagerOutput } from '@/interfaces/rest.types';
 import type { Product } from '@/domain/product.domain';
 
-type ProductListResponse = {
+export type ProductListResponse = {
   message: string;
   products: Product[];
   pager: PagerOutput;

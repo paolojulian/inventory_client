@@ -1,5 +1,4 @@
-import type { Product } from '@/domain/product.domain';
-import type { PagerOutput } from '@/interfaces/rest.types';
+import type { ProductListResponse } from '@/interfaces/rest/products/product-list';
 import { ProductUpdateInt } from '@/interfaces/rest/products/product-update';
 import {
   type InfiniteData,
@@ -8,13 +7,7 @@ import {
 } from '@tanstack/react-query';
 import { ProductQueryKeys } from './products.query-keys';
 
-type ProductListResponse = {
-  message: string;
-  products: Product[];
-  pager: PagerOutput;
-};
-
-const useUpdateProduct = () => {
+export const useUpdateProduct = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -43,5 +36,3 @@ const useUpdateProduct = () => {
     },
   });
 };
-
-export default useUpdateProduct;

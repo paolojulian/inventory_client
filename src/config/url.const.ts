@@ -13,6 +13,7 @@ export const URLS = {
         list: (queryString: string = '') =>
           `${URLS.rest.v1.products.base()}?${queryString}`,
         update: (id: string) => `${URLS.rest.v1.products.base()}/${id}`,
+        delete: (id: string) => `${URLS.rest.v1.products.base()}/${id}`,
       },
     },
   },

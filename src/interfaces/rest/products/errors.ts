@@ -21,3 +21,11 @@ class UnableToAddProduct extends Error {
   }
 }
 export const ErrUnableToAddProduct = new UnableToAddProduct();
+
+class UnableToDeleteProduct extends Error {
+  constructor() {
+    super();
+    this.message = 'Error: Unable to delete product';
+  }
+}
+export const ErrUnableToDeleteProduct = new UnableToDeleteProduct();

@@ -5,9 +5,12 @@ import FullScreenModal from '@/components/shared/FullScreenModal';
 import PencilIcon from '@/components/shared/icons/PencilIcon';
 import TrashIcon from '@/components/shared/icons/TrashIcon';
 import PageHeader from '@/components/shared/PageHeader';
-import { useProductStore } from '@/stores/product.store';
+import { useDeleteProduct } from '@/hooks/moduled/products';
 import { useFindProductInCache } from '@/hooks/moduled/products/useFindProductInCache';
+import { toast } from '@/hooks/useToast';
+import { useProductStore } from '@/stores/product.store';
 import { formatMoney } from '@/utils/money';
+import { useEffect } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 
 const ViewProduct = () => {
@@ -23,14 +26,37 @@ const ViewProduct = () => {
   const setSelectedEditProduct = useProductStore(
     (state) => state.setSelectedEditProduct
   );
+  const { mutateAsync: deleteProduct, isSuccess, isError } = useDeleteProduct();
 
   const handleClose = () => setSelectedViewProduct(null);
   const handleDelete = () => {
-    confirm(`Are you sure you want to archive this product?`);
+    if (selectedViewProduct) {
+      const userConfirmed = confirm(
+        `Are you sure you want to archive this product?`
+      );
+      if (userConfirmed) {
+        deleteProduct({ id: selectedViewProduct.id });
+      }
+    }
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success('Product deleted successfully.');
+      handleClose();
+    }
+  }, [isSuccess]);
+
+  useEffect(() => {
+    if (isError) {
+      toast.error('Unable to delete product, please try again later.');
+    }
+  }, [isError]);
+
   const handleEdit = () => {
     if (selectedViewProduct) {
       setSelectedEditProduct(selectedViewProduct);
+      handleClose();
     }
   };
 

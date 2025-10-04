@@ -1,4 +1,4 @@
-import { ProductAddInt } from '@/interfaces/rest/products/product-add';
+import { ProductDeleteInt } from '@/interfaces/rest/products/product-delete';
 import type { ProductListResponse } from '@/interfaces/rest/products/product-list';
 import {
   type InfiniteData,
@@ -7,14 +7,12 @@ import {
 } from '@tanstack/react-query';
 import { ProductQueryKeys } from './products.query-keys';
 
-export const useAddProduct = () => {
+export const useDeleteProduct = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ProductAddInt,
-    onSuccess: (response) => {
-      const addedProduct = response.product;
-
+    mutationFn: ProductDeleteInt,
+    onSuccess: (_, variables) => {
       queryClient.setQueriesData(
         { queryKey: [ProductQueryKeys.list()] },
         (oldData: InfiniteData<ProductListResponse> | undefined) => {
@@ -24,7 +22,9 @@ export const useAddProduct = () => {
             ...oldData,
             pages: oldData.pages.map((page) => ({
               ...page,
-              products: [addedProduct, ...page.products],
+              products: page.products.filter(
+                (product) => product.id !== variables.id
+              ),
             })),
           };
         }
