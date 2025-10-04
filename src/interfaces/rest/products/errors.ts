@@ -13,3 +13,11 @@ class UnableToUpdateProduct extends Error {
   }
 }
 export const ErrUnableToUpdateProduct = new UnableToUpdateProduct();
+
+class UnableToAddProduct extends Error {
+  constructor() {
+    super();
+    this.message = 'Error: Unable to add product';
+  }
+}
+export const ErrUnableToAddProduct = new UnableToAddProduct();

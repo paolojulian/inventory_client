@@ -1,3 +1,4 @@
+import useAddProduct from '@/hooks/moduled/products/useAddProduct';
 import useUpdateProduct from '@/hooks/moduled/products/useUpdateProduct';
 import { toast } from '@/hooks/useToast';
 import { useForm } from 'react-hook-form';
@@ -6,7 +7,7 @@ export type AddProductFormData = {
   name: string;
   sku: string;
   description: string;
-  price?: number;
+  price?: string | number;
   status?: 'active' | 'inactive';
 };
 
@@ -14,7 +15,7 @@ const DEFAULT_VALUES: AddProductFormData = {
   name: '',
   description: '',
   sku: '',
-  price: undefined,
+  price: '',
   status: 'active',
 };
 
@@ -39,11 +40,12 @@ export const useAddEditProductForm = (
     defaultValues: initialValues || DEFAULT_VALUES,
   });
 
-  const { mutateAsync } = useUpdateProduct();
+  const { mutateAsync: addProduct } = useAddProduct();
+  const { mutateAsync: updateProduct } = useUpdateProduct();
 
   const onSubmit = handleSubmit(async (data) => {
     if (productId) {
-      const result = await mutateAsync({
+      const result = await updateProduct({
         id: productId,
         data: {
           description: data.description,
@@ -58,6 +60,24 @@ export const useAddEditProductForm = (
       }
 
       toast.success('Product updated successfully.');
+      if (onSuccess) {
+        onSuccess();
+      }
+    } else {
+      const result = await addProduct({
+        data: {
+          description: data.description,
+          name: data.name,
+          price: Number(data.price),
+          sku: data.sku,
+        },
+      });
+      if (!result) {
+        toast.error('Unable to add product, please try again later.');
+        return;
+      }
+
+      toast.success('Product added successfully.');
       if (onSuccess) {
         onSuccess();
       }

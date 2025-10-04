@@ -9,6 +9,7 @@ export const URLS = {
       me: () => `${URLS.rest.v1.base()}/auth/me`,
       products: {
         base: () => `${URLS.rest.v1.base()}/products`,
+        add: () => `${URLS.rest.v1.products.base()}`,
         list: (queryString: string = '') =>
           `${URLS.rest.v1.products.base()}?${queryString}`,
         update: (id: string) => `${URLS.rest.v1.products.base()}/${id}`,
