@@ -15,6 +15,15 @@ export const URLS = {
         update: (id: string) => `${URLS.rest.v1.products.base()}/${id}`,
         delete: (id: string) => `${URLS.rest.v1.products.base()}/${id}`,
       },
+      stockEntries: {
+        base: () => `${URLS.rest.v1.base()}/stock-entries`,
+        add: () => `${URLS.rest.v1.stockEntries.base()}`,
+        list: (queryString: string = '') =>
+          `${URLS.rest.v1.stockEntries.base()}?${queryString}`,
+        get: (id: string) => `${URLS.rest.v1.stockEntries.base()}/${id}`,
+        update: (id: string) => `${URLS.rest.v1.stockEntries.base()}/${id}`,
+        delete: (id: string) => `${URLS.rest.v1.stockEntries.base()}/${id}`,
+      },
     },
   },
   links: {
@@ -26,6 +35,7 @@ export const URLS = {
         add: '/products/add',
       },
       stockEntries: '/stock-entries',
+      stockEntriesAdd: '/stock-entries/add',
       inventory: '/inventory',
     },
   },
