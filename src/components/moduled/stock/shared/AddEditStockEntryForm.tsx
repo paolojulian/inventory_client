@@ -1,4 +1,8 @@
 import type { AddStockEntryFormData } from '@/components/moduled/stock/hooks/useAddEditStockEntryForm';
+import {
+  STOCK_REASONS,
+  type StockReason,
+} from '@/components/moduled/stock/stock.types';
 import { AppButton, AppText, AppTextInput } from '@/components/shared';
 import AppDivider from '@/components/shared/AppDivider';
 import AppIconButton from '@/components/shared/AppIconButton';
@@ -16,7 +20,7 @@ type Props = {
   onClose: () => void;
   quantityInputRef: Ref<HTMLInputElement>;
   control: Control<AddStockEntryFormData>;
-  stockReasons: readonly { value: string; label: string }[];
+  stockReasons?: Record<StockReason, string>;
   titleText?: string;
   saveText?: string;
 };
@@ -26,7 +30,7 @@ const AddEditStockEntryForm = ({
   onSubmit,
   control,
   quantityInputRef,
-  stockReasons,
+  stockReasons = STOCK_REASONS,
   titleText,
   saveText = 'Save',
 }: Props) => {
@@ -56,6 +60,21 @@ const AddEditStockEntryForm = ({
       {/* body */}
       <section className='flex flex-col gap-4'>
         <Controller
+          name='product_id'
+          control={control}
+          rules={requiredAndEmptySpacesValidation}
+          render={({ field, fieldState }) => (
+            <AppTextInput
+              id='product_id'
+              placeholder='Product ID'
+              label='Product ID'
+              errorMessage={fieldState.error?.message}
+              {...field}
+            />
+          )}
+        />
+
+        <Controller
           name='quantity_delta'
           control={control}
           rules={{
@@ -78,65 +97,35 @@ const AddEditStockEntryForm = ({
             />
           )}
         />
-        
+
         <Controller
           name='reason'
           control={control}
           rules={requiredAndEmptySpacesValidation}
           render={({ field, fieldState }) => (
             <div>
-              <AppText variant='label' className='mb-2 block'>
+              <AppText variant='body' className='mb-2 block'>
                 Reason
               </AppText>
               <div className='flex flex-wrap gap-2'>
-                {stockReasons.map((reason) => (
+                {Object.entries(stockReasons).map(([reason, label]) => (
                   <AppRadioPill
-                    key={reason.value}
-                    id={`reason-${reason.value}`}
+                    key={reason}
+                    id={`reason-${reason}`}
                     name='reason'
-                    value={reason.value}
-                    label={reason.label}
-                    checked={field.value === reason.value}
+                    value={reason}
+                    label={label}
+                    checked={field.value === reason}
                     onChange={field.onChange}
                   />
                 ))}
               </div>
               {fieldState.error && (
-                <AppText variant='error' className='mt-1'>
+                <AppText variant='body' className='mt-1'>
                   {fieldState.error.message}
                 </AppText>
               )}
             </div>
-          )}
-        />
-
-        <Controller
-          name='product_id'
-          control={control}
-          rules={requiredAndEmptySpacesValidation}
-          render={({ field, fieldState }) => (
-            <AppTextInput
-              id='product_id'
-              placeholder='Product ID'
-              label='Product ID'
-              errorMessage={fieldState.error?.message}
-              {...field}
-            />
-          )}
-        />
-
-        <Controller
-          name='warehouse_id'
-          control={control}
-          rules={requiredAndEmptySpacesValidation}
-          render={({ field, fieldState }) => (
-            <AppTextInput
-              id='warehouse_id'
-              placeholder='Warehouse ID'
-              label='Warehouse ID'
-              errorMessage={fieldState.error?.message}
-              {...field}
-            />
           )}
         />
       </section>

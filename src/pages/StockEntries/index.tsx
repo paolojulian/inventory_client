@@ -11,7 +11,8 @@ const StockEntriesPage = () => {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [selectedStockEntry, setSelectedStockEntry] = useState<StockEntry | null>(null);
+  const [selectedStockEntry, setSelectedStockEntry] =
+    useState<StockEntry | null>(null);
 
   const handleAddStockEntry = () => {
     setIsAddModalOpen(true);
@@ -43,7 +44,7 @@ const StockEntriesPage = () => {
     <MainLayout>
       <div className='space-y-6'>
         <PageHeader title='Stock Entries' />
-        
+        {/*         
         <StockEntryList
           onAddStockEntry={handleAddStockEntry}
           onEditStockEntry={handleEditStockEntry}
@@ -66,7 +67,7 @@ const StockEntriesPage = () => {
           onClose={handleCloseModals}
           stockEntry={selectedStockEntry}
           onSuccess={handleSuccess}
-        />
+        /> */}
       </div>
     </MainLayout>
   );

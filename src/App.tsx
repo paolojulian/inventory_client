@@ -12,6 +12,7 @@ import { NotFoundPage } from '@/pages/NotFound';
 import ToastProvider from './components/providers/ToastProvider';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import AddProductPage from '@/pages/Products/add';
+import AddStockEntryPage from '@/pages/StockEntries/add';
 
 const queryClient = new QueryClient();
 
@@ -56,6 +57,14 @@ const App = () => {
               element={
                 <ProtectedRoute>
                   <StockEntriesPage />
+                </ProtectedRoute>
+              }
+            ></Route>
+            <Route
+              path={URLS.links.v1.stockEntries.add}
+              element={
+                <ProtectedRoute>
+                  <AddStockEntryPage />
                 </ProtectedRoute>
               }
             ></Route>
