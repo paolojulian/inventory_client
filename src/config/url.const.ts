@@ -1,9 +1,9 @@
+const API_URL = import.meta.env.VITE_REST_API_V1;
+
 export const URLS = {
   rest: {
     v1: {
-      base: () =>
-        (typeof process !== 'undefined' && process?.env?.REST_API_V1) ||
-        'http://localhost:8080',
+      base: () => API_URL,
       login: () => `${URLS.rest.v1.base()}/auth/login`,
       logout: () => `${URLS.rest.v1.base()}/auth/logout`,
       me: () => `${URLS.rest.v1.base()}/auth/me`,
