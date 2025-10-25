@@ -39,8 +39,10 @@ export const URLS = {
         index: '/products',
         add: '/products/add',
       },
-      stockEntries: '/stock-entries',
-      stockEntriesAdd: '/stock-entries/add',
+      stockEntries: {
+        index: '/stock-entries',
+        add: '/stock-entries/add',
+      },
       inventory: '/inventory',
     },
   },

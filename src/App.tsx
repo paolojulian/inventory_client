@@ -52,7 +52,7 @@ const App = () => {
               }
             ></Route>
             <Route
-              path={URLS.links.v1.stockEntries}
+              path={URLS.links.v1.stockEntries.index}
               element={
                 <ProtectedRoute>
                   <StockEntriesPage />

@@ -28,11 +28,11 @@ const BottomBar = () => {
       </NavItem>
 
       <NavItem
-        title='Stock'
-        href={URLS.links.v1.stockEntries}
-        isActive={isTabActive(URLS.links.v1.stockEntries)}
+        title='Supply'
+        href={URLS.links.v1.inventory}
+        isActive={isTabActive(URLS.links.v1.inventory)}
       >
-        <CubeIcon />
+        <ClipboardDocumentListIcon />
       </NavItem>
 
       <a
@@ -45,19 +45,19 @@ const BottomBar = () => {
       </a>
 
       <NavItem
-        title='Supply'
-        href={URLS.links.v1.inventory}
-        isActive={isTabActive(URLS.links.v1.inventory)}
-      >
-        <ClipboardDocumentListIcon />
-      </NavItem>
-
-      <NavItem
         title='Product'
         href={URLS.links.v1.products.index}
         isActive={isTabActive(URLS.links.v1.products.index)}
       >
         <TagIcon />
+      </NavItem>
+
+      <NavItem
+        title='Entries'
+        href={URLS.links.v1.stockEntries.index}
+        isActive={isTabActive(URLS.links.v1.stockEntries.index)}
+      >
+        <CubeIcon />
       </NavItem>
     </div>
   );

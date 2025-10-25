@@ -26,9 +26,9 @@ export const Sidebar = () => {
 
         <ul className='flex flex-col flex-1 justify-center'>
           <NavItem link={URLS.links.v1.dashboard} title='Dashboard' />
-          <NavItem link={URLS.links.v1.stockEntries} title='Stock' />
+          <NavItem link={URLS.links.v1.stockEntries.index} title='Stock' />
           <NavItem link={URLS.links.v1.inventory} title='Inventory' />
-          <NavItem link={URLS.links.v1.products} title='Products' />
+          <NavItem link={URLS.links.v1.products.index} title='Products' />
         </ul>
 
         <Hoverable>
