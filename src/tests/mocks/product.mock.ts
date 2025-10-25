@@ -12,13 +12,11 @@ export const PRODUCT_MOCKS: Product[] = [
     ...NewTestProduct(),
     name: 'Inactive Product 1',
     sku: 'inactive-product-1',
-    status: 'inactive',
   },
   {
     ...NewTestProduct(),
     name: 'Inactive Product 2',
     sku: 'inactive-product-2',
-    status: 'inactive',
   },
   NewTestProduct(),
   {
@@ -40,7 +38,6 @@ export const PRODUCT_MOCKS: Product[] = [
     ...NewTestProduct(),
     name: 'Inactive Product 3',
     sku: 'inactive-product-3',
-    status: 'inactive',
   },
   NewTestProduct(),
   {
@@ -70,7 +67,6 @@ export const PRODUCT_MOCKS: Product[] = [
     sku: 'discontinued-old',
     description: 'This product has been discontinued',
     price: { cents: 1999 },
-    status: 'inactive',
   },
   {
     ...NewTestProduct(),
@@ -106,7 +102,6 @@ export const PRODUCT_MOCKS: Product[] = [
     sku: 'seasonal-pumpkin',
     description: 'Pumpkin spice products - seasonal availability',
     price: { cents: 9999 },
-    status: 'inactive',
   },
   {
     ...NewTestProduct(),
@@ -149,7 +144,6 @@ export const PRODUCT_MOCKS: Product[] = [
     sku: 'maintenance-test',
     description: 'Product temporarily unavailable for maintenance',
     price: { cents: 19999 },
-    status: 'inactive',
   },
   {
     ...NewTestProduct(),
@@ -192,7 +186,6 @@ export const PRODUCT_MOCKS: Product[] = [
     sku: 'recalled-batch-001',
     description: 'Product recalled due to quality issues',
     price: { cents: 4999 },
-    status: 'inactive',
   },
   {
     ...NewTestProduct(),
@@ -235,7 +228,6 @@ export const PRODUCT_MOCKS: Product[] = [
     sku: 'temp-unavailable',
     description: 'Product temporarily out of stock',
     price: { cents: 14999 },
-    status: 'inactive',
   },
   {
     ...NewTestProduct(),
@@ -278,7 +270,6 @@ export const PRODUCT_MOCKS: Product[] = [
     sku: 'under-review-001',
     description: 'Product currently under quality review',
     price: { cents: 8999 },
-    status: 'inactive',
   },
   {
     ...NewTestProduct(),
@@ -321,7 +312,6 @@ export const PRODUCT_MOCKS: Product[] = [
     sku: 'discontinued-line-2023',
     description: 'Product line discontinued in 2023',
     price: { cents: 5999 },
-    status: 'inactive',
   },
   {
     ...NewTestProduct(),
@@ -357,6 +347,5 @@ export const PRODUCT_MOCKS: Product[] = [
     sku: 'qc-hold-batch-002',
     description: 'Product held for quality control testing',
     price: { cents: 12999 },
-    status: 'inactive',
   },
 ];

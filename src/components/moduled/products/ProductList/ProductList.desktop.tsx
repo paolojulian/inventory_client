@@ -57,7 +57,7 @@ const ProductListDesktop = ({
           {items.map((product) => (
             <AppTableRow
               key={product.id}
-              variant={product.status === 'active' ? 'default' : 'disabled'}
+              variant={product.is_active ? 'default' : 'disabled'}
             >
               {/* <AppTableData>{product.id}</AppTableData> */}
               <AppTableData>

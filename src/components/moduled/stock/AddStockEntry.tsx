@@ -1,6 +1,6 @@
-import { BottomSheetModal } from '@/components/shared';
-import AddEditStockEntryForm from '@/components/moduled/stock/shared/AddEditStockEntryForm';
 import { useAddEditStockEntryForm } from '@/components/moduled/stock/hooks/useAddEditStockEntryForm';
+import AddEditStockEntryForm from '@/components/moduled/stock/shared/AddEditStockEntryForm';
+import { BottomSheetModal } from '@/components/shared';
 import { useRef } from 'react';
 
 type Props = {
@@ -10,8 +10,8 @@ type Props = {
 
 const AddStockEntry = ({ isOpen, onClose }: Props) => {
   const quantityInputRef = useRef<HTMLInputElement>(null);
-  
-  const { control, onSubmit, stockReasons } = useAddEditStockEntryForm({
+
+  const { control, onSubmit } = useAddEditStockEntryForm({
     onSuccess: onClose,
   });
 
@@ -22,7 +22,6 @@ const AddStockEntry = ({ isOpen, onClose }: Props) => {
         onSubmit={onSubmit}
         onClose={onClose}
         quantityInputRef={quantityInputRef}
-        stockReasons={stockReasons}
         titleText='Add Stock Entry'
         saveText='Add Stock Entry'
       />

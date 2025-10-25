@@ -12,15 +12,17 @@ type Props = {
 
 const EditStockEntry = ({ isOpen, onClose, stockEntry }: Props) => {
   const quantityInputRef = useRef<HTMLInputElement>(null);
-  
-  const { control, onSubmit, stockReasons } = useAddEditStockEntryForm({
+
+  const { control, onSubmit } = useAddEditStockEntryForm({
     stockEntryId: stockEntry?.id,
-    initialValues: stockEntry ? {
-      quantity_delta: stockEntry.quantity_delta.toString(),
-      reason: stockEntry.reason,
-      product_id: stockEntry.product_id,
-      warehouse_id: stockEntry.warehouse_id,
-    } : undefined,
+    initialValues: stockEntry
+      ? {
+          quantity_delta: stockEntry.quantity_delta.toString(),
+          reason: stockEntry.reason,
+          product_id: stockEntry.product_id,
+          warehouse_id: stockEntry.warehouse_id,
+        }
+      : undefined,
     onSuccess: onClose,
   });
 
@@ -31,7 +33,6 @@ const EditStockEntry = ({ isOpen, onClose, stockEntry }: Props) => {
         onSubmit={onSubmit}
         onClose={onClose}
         quantityInputRef={quantityInputRef}
-        stockReasons={stockReasons}
         titleText='Edit Stock Entry'
         saveText='Update Stock Entry'
       />
