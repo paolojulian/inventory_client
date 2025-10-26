@@ -1,6 +1,7 @@
 import type { Product } from '@/domain/product.domain';
 import { ErrUnableToAddProduct } from '@/interfaces/rest/products/errors';
 import { URLS } from '../../../config/url.const';
+import { jsonAuthHeaders } from '@/utils/auth';
 
 type ProductAddResponse = {
   product: Product;
@@ -23,6 +24,7 @@ export async function ProductAddInt(
   try {
     const response = await fetch(URLS.rest.v1.products.add(), {
       method: 'POST',
+      headers: jsonAuthHeaders(),
       body: JSON.stringify(params.data),
     });
 

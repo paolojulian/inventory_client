@@ -1,15 +1,12 @@
 import { useMutation } from '@tanstack/react-query';
 import { URLS } from '@/config/url.const';
+import { withAuth } from '@/utils/auth';
 import type { StockEntryDeleteResponse } from '@/interfaces/rest/stock/stock-entry-delete';
 
 const deleteStockEntry = async (id: string): Promise<StockEntryDeleteResponse> => {
-  const token = localStorage.getItem('token');
-  
   const response = await fetch(URLS.rest.v1.stockEntries.delete(id), {
     method: 'DELETE',
-    headers: {
-      'Authorization': `Bearer ${token}`,
-    },
+    headers: withAuth(),
   });
 
   if (!response.ok) {

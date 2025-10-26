@@ -1,5 +1,6 @@
 import { ErrUnableToGetProductList } from '@/interfaces/rest/products/errors';
 import { URLS } from '../../../config/url.const';
+import { withAuth } from '@/utils/auth';
 import type { PagerInput, PagerOutput } from '@/interfaces/rest.types';
 import type { Product } from '@/domain/product.domain';
 
@@ -40,6 +41,7 @@ export async function ProductListInt(
 
     const response = await fetch(URLS.rest.v1.products.list(queryString), {
       method: 'GET',
+      headers: withAuth(),
     });
     if (!response.ok) {
       throw ErrUnableToGetProductList;

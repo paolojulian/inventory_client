@@ -1,6 +1,7 @@
 import type { Product } from '@/domain/product.domain';
 import { ErrUnableToUpdateProduct } from '@/interfaces/rest/products/errors';
 import { URLS } from '../../../config/url.const';
+import { jsonAuthHeaders } from '@/utils/auth';
 
 type ProductUpdateResponse = {
   message: string;
@@ -25,6 +26,7 @@ export async function ProductUpdateInt(
   try {
     const response = await fetch(URLS.rest.v1.products.update(params.id), {
       method: 'PUT',
+      headers: jsonAuthHeaders(),
       body: JSON.stringify(params.data),
     });
 

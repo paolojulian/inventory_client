@@ -3,12 +3,22 @@ import { USECASES_AUTH_ERRORS } from './errors';
 
 export default async function checkIfLoggedIn(): Promise<boolean> {
   try {
+    const token = localStorage.getItem('token');
+    
+    if (!token) {
+      return false;
+    }
+
     const result = await fetch(URLS.rest.v1.me(), {
       method: 'POST',
-      credentials: 'include',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
     });
 
     if (result.status === 401) {
+      // Token is invalid, remove it
+      localStorage.removeItem('token');
       return false;
     }
 

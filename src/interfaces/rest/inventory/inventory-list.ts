@@ -2,6 +2,7 @@ import type { InventoryItem } from '@/domain/inventory.domain';
 import type { PagerInput, PagerOutput } from '@/interfaces/rest.types';
 import { ErrUnableToGetInventoryList } from '@/interfaces/rest/inventory/errors';
 import { URLS } from '../../../config/url.const';
+import { withAuth } from '@/utils/auth';
 
 export type InventoryListResponse = {
   message: string;
@@ -36,6 +37,7 @@ export async function InventoryListInt(
 
     const response = await fetch(URLS.rest.v1.inventory.list(queryString), {
       method: 'GET',
+      headers: withAuth(),
     });
     if (!response.ok) {
       throw ErrUnableToGetInventoryList;

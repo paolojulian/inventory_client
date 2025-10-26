@@ -1,4 +1,5 @@
 import { URLS } from '../../../config/url.const';
+import { setAuthToken, jsonHeaders } from '@/utils/auth';
 import { ErrUnableToLogin, ErrUnauthorizedLogin } from './errors';
 
 type LoginIntInput = {
@@ -6,12 +7,17 @@ type LoginIntInput = {
   password: string;
 };
 
+type LoginResponse = {
+  message: string;
+  token: string;
+};
+
 async function LoginInt(input: LoginIntInput): Promise<Error | null> {
   try {
     const response = await fetch(URLS.rest.v1.login(), {
       method: 'POST',
+      headers: jsonHeaders(),
       body: JSON.stringify(input),
-      credentials: 'include',
     });
     if (response.status === 401) {
       throw ErrUnauthorizedLogin;
@@ -20,6 +26,10 @@ async function LoginInt(input: LoginIntInput): Promise<Error | null> {
     if (!response.ok) {
       throw ErrUnableToLogin;
     }
+
+    const data: LoginResponse = await response.json();
+    
+    setAuthToken(data.token);
 
     return null;
   } catch (e) {

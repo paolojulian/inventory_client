@@ -1,16 +1,12 @@
 import { useMutation } from '@tanstack/react-query';
 import { URLS } from '@/config/url.const';
+import { jsonAuthHeaders } from '@/utils/auth';
 import type { StockEntryUpdateRequest, StockEntryUpdateResponse } from '@/interfaces/rest/stock/stock-entry-update';
 
 const updateStockEntry = async ({ id, data }: { id: string; data: StockEntryUpdateRequest }): Promise<StockEntryUpdateResponse> => {
-  const token = localStorage.getItem('token');
-  
   const response = await fetch(URLS.rest.v1.stockEntries.update(id), {
     method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
-    },
+    headers: jsonAuthHeaders(),
     body: JSON.stringify(data),
   });
 
