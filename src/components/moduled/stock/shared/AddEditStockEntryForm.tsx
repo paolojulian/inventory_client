@@ -3,7 +3,12 @@ import {
   STOCK_REASONS,
   type StockReason,
 } from '@/components/moduled/stock/stock.types';
-import { AppButton, AppText, AppTextInput } from '@/components/shared';
+import {
+  AppButton,
+  AppText,
+  AppTextInput,
+  BottomSheetPicker,
+} from '@/components/shared';
 import AppDivider from '@/components/shared/AppDivider';
 import AppIconButton from '@/components/shared/AppIconButton';
 import { AppRadioPill } from '@/components/shared/AppRadioPill';
@@ -63,13 +68,13 @@ const AddEditStockEntryForm = ({
           name='product_id'
           control={control}
           rules={requiredAndEmptySpacesValidation}
-          render={({ field, fieldState }) => (
-            <AppTextInput
+          render={({ field }) => (
+            <BottomSheetPicker
+              onSelect={field.onChange}
               id='product_id'
-              placeholder='Product ID'
-              label='Product ID'
-              errorMessage={fieldState.error?.message}
-              {...field}
+              placeholder='Select product'
+              label='Product'
+              value={field.value}
             />
           )}
         />

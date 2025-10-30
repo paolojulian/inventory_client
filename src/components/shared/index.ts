@@ -4,10 +4,10 @@ export { AppRadioPill } from './AppRadioPill';
 export { AppText } from './AppText';
 export { AppTextInput } from './AppTextInput';
 export { AppTextInputSm } from './AppTextInputSm';
+export { BottomSheetPicker } from './BottomSheetPicker';
 export { Hoverable } from './Hoverable';
 export { InfiniteScroll } from './InfiniteScroll';
 export { Popper } from './Popper';
 export { default as BottomSheetModal } from './BottomSheetModal';
 export { default as FullScreenModal } from './FullScreenModal';
 export type { PopperPlacement } from './Popper';
-
