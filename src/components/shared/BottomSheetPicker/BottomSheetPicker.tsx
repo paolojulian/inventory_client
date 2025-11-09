@@ -1,9 +1,10 @@
 import { AppText } from '@/components/shared/AppText';
 import BottomSheetModal from '@/components/shared/BottomSheetModal';
-import { BOTTOM_SHEET_PICKER_MOCKS } from '@/components/shared/BottomSheetPicker/BottomSheetPicker.mocks';
 import cn from '@/utils/cn';
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
+
+export type BottomSheetPickerOption = { id: string; value: string };
 
 type Props = {
   onSelect: (id: string) => void;
@@ -13,6 +14,7 @@ type Props = {
   placeholder?: string;
   isFullWidth?: boolean;
   className?: string;
+  options?: BottomSheetPickerOption[];
 };
 
 const BottomSheetPicker = ({
@@ -22,12 +24,11 @@ const BottomSheetPicker = ({
   value,
   placeholder,
   isFullWidth = true,
+  options = [],
   className,
 }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const hasValue: boolean = Boolean(value);
-
-  const products = BOTTOM_SHEET_PICKER_MOCKS;
 
   const handleToggleBottomSheet = () => setIsOpen(!isOpen);
   const handleCloseBottomSheet = () => setIsOpen(false);
@@ -36,7 +37,7 @@ const BottomSheetPicker = ({
     handleCloseBottomSheet();
   };
 
-  const selectedProduct = products.find((product) => product.id === value);
+  const selectedOption = options.find((option) => option.id === value);
 
   return (
     <>
@@ -61,7 +62,7 @@ const BottomSheetPicker = ({
           )}
         >
           <span className='text-foreground'>
-            {hasValue && selectedProduct ? selectedProduct.value : <>&nbsp;</>}
+            {hasValue && selectedOption ? selectedOption.value : <>&nbsp;</>}
           </span>
         </div>
 
@@ -114,12 +115,13 @@ const BottomSheetPicker = ({
               </AppText>
 
               <div role='menu' className='pb-10'>
-                {products.map(({ id, value }) => (
+                {options.map(({ id, value }) => (
                   <BottomSheetPickerItem
+                    key={id}
                     onSelect={handleSelect}
                     id={id}
                     value={value}
-                    isSelected={selectedProduct?.id === id}
+                    isSelected={selectedOption?.id === id}
                   />
                 ))}
               </div>

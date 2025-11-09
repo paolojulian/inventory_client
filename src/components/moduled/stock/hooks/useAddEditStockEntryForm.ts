@@ -1,24 +1,26 @@
+import type { StockReason } from '@/components/moduled/stock/stock.types';
+import { DEFAULT_WAREHOUSE_ID } from '@/domain/warehouse.domain';
 import { useAddStockEntry, useUpdateStockEntry } from '@/hooks/moduled/stock';
 import { toast } from '@/hooks/useToast';
 import { useForm } from 'react-hook-form';
 
 export type AddStockEntryFormData = {
   quantity_delta: string | number;
-  reason: string;
+  reason: StockReason;
   product_id: string;
   warehouse_id: string;
 };
 
 const DEFAULT_VALUES: AddStockEntryFormData = {
-  quantity_delta: '',
-  reason: '',
+  quantity_delta: 1,
+  reason: 'restock',
   product_id: '',
   warehouse_id: '',
 };
 
-const STOCK_REASONS = [
-  { value: 'restock', label: 'Restock' },
+const STOCK_REASONS: { value: StockReason; label: string }[] = [
   { value: 'sale', label: 'Sale' },
+  { value: 'restock', label: 'Restock' },
   { value: 'damage', label: 'Damage' },
   { value: 'transfer_in', label: 'Transfer In' },
   { value: 'transfer_out', label: 'Transfer Out' },
@@ -43,7 +45,10 @@ export const useAddEditStockEntryForm = (
     reset,
     handleSubmit,
   } = useForm<AddStockEntryFormData>({
-    defaultValues: initialValues || DEFAULT_VALUES,
+    defaultValues: {
+      ...DEFAULT_VALUES,
+      warehouse_id: DEFAULT_WAREHOUSE_ID,
+    },
   });
 
   const { mutateAsync: addStockEntry } = useAddStockEntry();

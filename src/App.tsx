@@ -1,18 +1,18 @@
 import { URLS } from '@/config/url.const';
+import InventoryPage from '@/pages/Inventory';
+import { NotFoundPage } from '@/pages/NotFound';
 import ProductsPage from '@/pages/Products';
+import AddProductPage from '@/pages/Products/add';
 import StockEntriesPage from '@/pages/StockEntries';
+import AddStockEntryPage from '@/pages/StockEntries/add';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Route, Routes } from 'react-router';
+import ToastProvider from './components/providers/ToastProvider';
 import GuestRoute from './components/routes/GuestRoute';
 import ProtectedRoute from './components/routes/ProtectedRoute';
 import DashboardPage from './pages/Dashboard';
 import LoginPage from './pages/Login';
 import { useLoadInitial } from './usecases/useLoadInitial';
-import InventoryPage from '@/pages/Inventory';
-import { NotFoundPage } from '@/pages/NotFound';
-import ToastProvider from './components/providers/ToastProvider';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import AddProductPage from '@/pages/Products/add';
-import AddStockEntryPage from '@/pages/StockEntries/add';
 
 const queryClient = new QueryClient();
 
@@ -25,6 +25,7 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <ToastProvider>
+        {/* <OfflineIndicator /> */}
         <Routes>
           <>
             {/* Protected routes */}

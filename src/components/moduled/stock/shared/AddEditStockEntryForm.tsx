@@ -1,17 +1,18 @@
 import type { AddStockEntryFormData } from '@/components/moduled/stock/hooks/useAddEditStockEntryForm';
+import ProductBottomSheetPicker from '@/components/moduled/stock/shared/ProductBottomSheetPicker';
 import {
   STOCK_REASONS,
   type StockReason,
 } from '@/components/moduled/stock/stock.types';
 import {
   AppButton,
+  AppChip,
   AppText,
-  AppTextInput,
-  BottomSheetPicker,
+  AppTextInput
 } from '@/components/shared';
 import AppDivider from '@/components/shared/AppDivider';
 import AppIconButton from '@/components/shared/AppIconButton';
-import { AppRadioPill } from '@/components/shared/AppRadioPill';
+import PlusIcon from '@/components/shared/icons/PlusIcon';
 import XMarkIcon from '@/components/shared/icons/XMarkIcon';
 import {
   requiredAndEmptySpacesValidation,
@@ -69,7 +70,7 @@ const AddEditStockEntryForm = ({
           control={control}
           rules={requiredAndEmptySpacesValidation}
           render={({ field }) => (
-            <BottomSheetPicker
+            <ProductBottomSheetPicker
               onSelect={field.onChange}
               id='product_id'
               placeholder='Select product'
@@ -90,16 +91,37 @@ const AddEditStockEntryForm = ({
             },
           }}
           render={({ field, fieldState }) => (
-            <AppTextInput
-              id='quantity_delta'
-              autoFocus
-              placeholder='Enter quantity change'
-              label='Quantity Delta'
-              type='number'
-              errorMessage={fieldState.error?.message}
-              {...field}
-              ref={quantityInputRef}
-            />
+            <div className='flex flex-row items-center'>
+              <button
+                onClick={() => {
+                  if (Number(field.value) <= 1) return;
+                  field.onChange(Number(field.value) - 1);
+                }}
+                type='button'
+                className='h-full px-4 border-l border-y border-grey flex items-center justify-center'
+              >
+                -
+              </button>
+              <AppTextInput
+                id='quantity_delta'
+                autoFocus
+                placeholder='Enter quantity change'
+                label='Quantity Delta'
+                type='number'
+                errorMessage={fieldState.error?.message}
+                {...field}
+                ref={quantityInputRef}
+              />
+              <button
+                onClick={() => {
+                  field.onChange(Number(field.value) + 1);
+                }}
+                type='button'
+                className='h-full px-4 border-r border-y border-grey flex items-center justify-center'
+              >
+                <PlusIcon className='w-4 h-4' />
+              </button>
+            </div>
           )}
         />
 
@@ -114,14 +136,11 @@ const AddEditStockEntryForm = ({
               </AppText>
               <div className='flex flex-wrap gap-2'>
                 {Object.entries(stockReasons).map(([reason, label]) => (
-                  <AppRadioPill
+                  <AppChip
                     key={reason}
-                    id={`reason-${reason}`}
-                    name='reason'
-                    value={reason}
                     label={label}
-                    checked={field.value === reason}
-                    onChange={field.onChange}
+                    onClick={() => field.onChange(reason)}
+                    isSelected={field.value === reason}
                   />
                 ))}
               </div>

@@ -9,3 +9,13 @@ export const STOCK_ENTRY_ERRORS = {
   UNAUTHORIZED: 'User not authenticated',
   INTERNAL_ERROR: 'Internal server error',
 } as const;
+
+class UnableToAddStockEntry extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = 'UnableToAddStockEntry';
+  }
+}
+export const ErrUnableToAddStockEntry = new UnableToAddStockEntry(
+  'Error: Unable to add stock entry'
+);

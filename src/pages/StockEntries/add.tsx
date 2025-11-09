@@ -12,7 +12,7 @@ export type FilterStatus = 'all' | 'active' | 'inactive';
 const AddStockEntryPage = () => {
   const navigate = useNavigate();
 
-  const handleSuccess = () => navigate(URLS.links.v1.products.index);
+  const handleSuccess = () => navigate(URLS.links.v1.stockEntries.index);
   const nameInputRef = useRef<HTMLInputElement>(null);
   const { control, onSubmit } = useAddEditStockEntryForm({
     onSuccess: handleSuccess,
