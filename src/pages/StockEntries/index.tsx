@@ -2,6 +2,7 @@ import MainLayout from '@/components/layouts/MainLayout';
 import AddStockEntry from '@/components/moduled/stock/AddStockEntry';
 import DeleteStockEntry from '@/components/moduled/stock/DeleteStockEntry';
 import EditStockEntry from '@/components/moduled/stock/EditStockEntry';
+import StockEntryList from '@/components/moduled/stock/StockEntryList';
 import PageHeader from '@/components/shared/PageHeader';
 import type { StockEntry } from '@/interfaces/rest/stock/stock-entry-list';
 import { useState } from 'react';
@@ -42,18 +43,11 @@ const StockEntriesPage = () => {
   return (
     <MainLayout>
       <div className='space-y-6'>
-        <PageHeader title='Stock Entries' />
-                
-        {/* <StockEntryList
-          onAddStockEntry={handleAddStockEntry}
-          onEditStockEntry={handleEditStockEntry}
-          onDeleteStockEntry={handleDeleteStockEntry}
-        /> */}
+        <PageHeader title='Stock Entries' shouldHideBack shouldHideKebab />
 
-        <AddStockEntry
-          isOpen={isAddModalOpen}
-          onClose={handleCloseModals}
-        />
+        <StockEntryList />
+
+        <AddStockEntry isOpen={isAddModalOpen} onClose={handleCloseModals} />
 
         <EditStockEntry
           isOpen={isEditModalOpen}

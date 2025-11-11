@@ -1,7 +1,13 @@
 import { AppText } from '@/components/shared/AppText';
 import cn from '@/utils/cn';
 
-type AppPillVariant = 'success' | 'danger' | 'black';
+export type AppPillVariant =
+  | 'success'
+  | 'danger'
+  | 'black'
+  | 'warning'
+  | 'blue'
+  | 'grey';
 
 type Props = {
   title: string;
@@ -15,6 +21,9 @@ const AppPill = ({ title, variant }: Props) => {
         'bg-emerald-100 border border-emerald-200': variant === 'success',
         'bg-red-100 border border-red-200': variant === 'danger',
         'bg-foreground border border-background': variant === 'black',
+        'bg-blue-100 border border-blue-200': variant === 'blue',
+        'bg-orange-100 border border-orange-200': variant === 'warning',
+        'bg-neutral-100 border border-neutral-200': variant === 'grey',
       })}
     >
       <AppText
@@ -22,6 +31,9 @@ const AppPill = ({ title, variant }: Props) => {
           'text-emerald-800': variant === 'success',
           'text-red-800': variant === 'danger',
           'text-background': variant === 'black',
+          'text-blue-800': variant === 'blue',
+          'text-orange-800': variant === 'warning',
+          'text-neutral-800': variant === 'grey',
         })}
       >
         {title}

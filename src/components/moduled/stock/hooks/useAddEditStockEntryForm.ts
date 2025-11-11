@@ -44,6 +44,8 @@ export const useAddEditStockEntryForm = (
     formState: { errors },
     reset,
     handleSubmit,
+    watch,
+    setValue,
   } = useForm<AddStockEntryFormData>({
     defaultValues: {
       ...DEFAULT_VALUES,
@@ -100,5 +102,7 @@ export const useAddEditStockEntryForm = (
     onResetForm,
     onSubmit,
     stockReasons: STOCK_REASONS,
+    watch,
+    setValue,
   };
 };

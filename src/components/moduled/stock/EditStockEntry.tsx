@@ -13,7 +13,7 @@ type Props = {
 const EditStockEntry = ({ isOpen, onClose, stockEntry }: Props) => {
   const quantityInputRef = useRef<HTMLInputElement>(null);
 
-  const { control, onSubmit } = useAddEditStockEntryForm({
+  const { control, onSubmit, watch, setValue } = useAddEditStockEntryForm({
     stockEntryId: stockEntry?.id,
     initialValues: stockEntry
       ? {
@@ -33,6 +33,8 @@ const EditStockEntry = ({ isOpen, onClose, stockEntry }: Props) => {
         onSubmit={onSubmit}
         onClose={onClose}
         quantityInputRef={quantityInputRef}
+        watch={watch}
+        setValue={setValue}
         titleText='Edit Stock Entry'
         saveText='Update Stock Entry'
       />

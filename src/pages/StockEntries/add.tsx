@@ -14,7 +14,7 @@ const AddStockEntryPage = () => {
 
   const handleSuccess = () => navigate(URLS.links.v1.stockEntries.index);
   const nameInputRef = useRef<HTMLInputElement>(null);
-  const { control, onSubmit } = useAddEditStockEntryForm({
+  const { control, onSubmit, watch, setValue } = useAddEditStockEntryForm({
     onSuccess: handleSuccess,
   });
 
@@ -31,6 +31,8 @@ const AddStockEntryPage = () => {
           onClose={onClose}
           quantityInputRef={nameInputRef}
           control={control}
+          watch={watch}
+          setValue={setValue}
         />
       </div>
     </div>

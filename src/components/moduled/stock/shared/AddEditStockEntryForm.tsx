@@ -4,12 +4,7 @@ import {
   STOCK_REASONS,
   type StockReason,
 } from '@/components/moduled/stock/stock.types';
-import {
-  AppButton,
-  AppChip,
-  AppText,
-  AppTextInput
-} from '@/components/shared';
+import { AppButton, AppChip, AppText, AppTextInput } from '@/components/shared';
 import AppDivider from '@/components/shared/AppDivider';
 import AppIconButton from '@/components/shared/AppIconButton';
 import PlusIcon from '@/components/shared/icons/PlusIcon';
@@ -19,13 +14,21 @@ import {
   requiredValidation,
 } from '@/utils/form-validations';
 import type { FormEvent, Ref } from 'react';
-import { Controller, type Control } from 'react-hook-form';
+import { useEffect } from 'react';
+import {
+  Controller,
+  type Control,
+  type UseFormSetValue,
+  type UseFormWatch,
+} from 'react-hook-form';
 
 type Props = {
   onSubmit: () => void;
   onClose: () => void;
   quantityInputRef: Ref<HTMLInputElement>;
   control: Control<AddStockEntryFormData>;
+  watch: UseFormWatch<AddStockEntryFormData>;
+  setValue: UseFormSetValue<AddStockEntryFormData>;
   stockReasons?: Record<StockReason, string>;
   titleText?: string;
   saveText?: string;
@@ -36,10 +39,23 @@ const AddEditStockEntryForm = ({
   onSubmit,
   control,
   quantityInputRef,
+  watch,
+  setValue,
   stockReasons = STOCK_REASONS,
   titleText,
   saveText = 'Save',
 }: Props) => {
+  const reason = watch('reason');
+  const quantityDelta = watch('quantity_delta');
+
+  // Reset quantity to 1 when switching from negative value to non-adjustment reason
+  useEffect(() => {
+    const currentQuantity = Number(quantityDelta);
+    if (reason !== 'adjustment' && currentQuantity < 0) {
+      setValue('quantity_delta', 1);
+    }
+  }, [reason, quantityDelta, setValue]);
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     onSubmit();
@@ -85,17 +101,35 @@ const AddEditStockEntryForm = ({
           control={control}
           rules={{
             ...requiredValidation,
-            min: {
-              value: 1,
-              message: 'Quantity must be at least 1',
+            validate: (value) => {
+              const numValue = Number(value);
+              if (reason === 'adjustment') {
+                // Allow any non-zero value for adjustments
+                if (numValue === 0) {
+                  return 'Quantity cannot be 0';
+                }
+              } else {
+                // Only allow positive values for non-adjustment reasons
+                if (numValue < 1) {
+                  return 'Quantity must be at least 1';
+                }
+              }
+              return true;
             },
           }}
           render={({ field, fieldState }) => (
             <div className='flex flex-row items-center'>
               <button
                 onClick={() => {
-                  if (Number(field.value) <= 1) return;
-                  field.onChange(Number(field.value) - 1);
+                  const currentValue = Number(field.value);
+                  // For adjustment, allow going negative
+                  if (reason === 'adjustment') {
+                    field.onChange(currentValue - 1);
+                  } else {
+                    // For other reasons, stop at 1
+                    if (currentValue <= 1) return;
+                    field.onChange(currentValue - 1);
+                  }
                 }}
                 type='button'
                 className='h-full px-4 border-l border-y border-grey flex items-center justify-center'
